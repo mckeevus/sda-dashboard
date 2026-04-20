@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDA Admin — Data Upload</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 14px;
+  background: #F3F4F6;
+  color: #374151;
+  min-height: 100vh;
+}
+
+/* ── Nav ─────────────────────────────────────────────── */
+.nav {
+  background: #5B2C8D;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.nav-left { display: flex; align-items: center; gap: 12px; }
+.nav-logo {
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.3px;
+}
+.nav-badge {
+  font-size: 11px;
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.9);
+  padding: 3px 9px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.nav-logout {
+  font-size: 12px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: all 0.12s;
+}
+.nav-logout:hover {
+  color: white;
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── Page layout ─────────────────────────────────────── */
+.page {
+  max-width: 660px;
+  margin: 40px auto;
+  padding: 0 16px 60px;
+}
+
+/* ── Card ────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #E5E7EB;
+  padding: 32px;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A2E;
+  margin-bottom: 5px;
+}
+.card-subtitle {
+  font-size: 13px;
+  color: #6B7280;
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+
+/* ── Form controls ───────────────────────────────────── */
+.form-group { margin-bottom: 20px; }
+.form-group:last-child { margin-bottom: 0; }
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6B7280;
+  margin-bottom: 6px;
+}
+input[type="password"],
+input[type="file"],
+select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'DM Sans', Arial, sans-serif;
+  color: #1A1A2E;
+  background: white;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+input:focus, select:focus {
+  border-color: #5B2C8D;
+  box-shadow: 0 0 0 3px rgba(91,44,141,0.1);
+}
+input[type="file"] { cursor: pointer; }
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.row-2 label { font-weight: 600; font-size: 12px; text-transform: none; letter-spacing: 0; color: #6B7280; }
+
+/* ── Buttons ─────────────────────────────────────────── */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s, opacity 0.15s;
+  width: 100%;
+}
+.btn-primary {
+  background: #5B2C8D;
+  color: white;
+  font-size: 14px;
+  padding: 13px;
+  margin-top: 6px;
+}
+.btn-primary:hover:not(:disabled) { background: #4a2275; }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ── Divider ─────────────────────────────────────────── */
+.divider { border: none; border-top: 1px solid #E5E7EB; margin: 24px 0; }
+
+/* ── Quarter preview ─────────────────────────────────── */
+.quarter-preview {
+  background: #F5F0FC;
+  border: 1px solid #D9C9F0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #5B2C8D;
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.quarter-preview .q-item { display: flex; flex-direction: column; gap: 1px; }
+.quarter-preview .q-label { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; opacity: .7; }
+.quarter-preview .q-value { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 600; }
+
+/* ── Mapping table ───────────────────────────────────── */
+details { margin-top: 8px; }
+summary {
+  font-size: 12px;
+  color: #5B2C8D;
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+  padding: 4px 0;
+}
+summary:hover { text-decoration: underline; }
+.mapping-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 10px;
+}
+.mapping-table th {
+  background: #F5F0FC;
+  padding: 7px 10px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #6B7280;
+  border-bottom: 1px solid #E5E7EB;
+}
+.mapping-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #F3F4F6;
+  color: #374151;
+}
+.mapping-table tr.highlight td {
+  background: #EDE7F6;
+  font-weight: 600;
+  color: #4a2275;
+}
+.mapping-table code {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  background: #F3F4F6;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.mapping-table tr.highlight code {
+  background: #D9C9F0;
+}
+.info-note {
+  background: #E3F2FD;
+  border: 1px solid #90CAF9;
+  border-radius: 7px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #1565C0;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* ── Error inline ────────────────────────────────────── */
+.field-error {
+  font-size: 12px;
+  color: #C62828;
+  margin-top: 6px;
+  display: none;
+}
+
+/* ── Status panel ────────────────────────────────────── */
+.status-panel {
+  margin-top: 20px;
+  border-radius: 8px;
+  padding: 16px 18px;
+  display: none;
+}
+.status-panel.success {
+  background: #E8F5E9;
+  border: 1px solid #A5D6A7;
+}
+.status-panel.error {
+  background: #FFEBEE;
+  border: 1px solid #EF9A9A;
+}
+.status-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.status-panel.success .status-title { color: #2E7D32; }
+.status-panel.error .status-title { color: #C62828; }
+.status-detail {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.7;
+}
+.status-detail .mono { font-family: 'DM Mono', monospace; font-size: 12px; }
+.status-meta {
+  font-size: 11px;
+  color: #9CA3AF;
+  margin-top: 6px;
+}
+
+/* ── Spinner ─────────────────────────────────────────── */
+.spinner {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo">SDA Analytics &mdash; Admin</div>
+    <span class="nav-badge" id="nav-badge" style="display:none">Upload Portal</span>
+  </div>
+  <a href="/admin/logout" class="nav-logout" id="logout-link" style="display:none">Sign out</a>
+</nav>
+
+<div class="page">
+
+  <!-- ══ LOGIN SECTION ════════════════════════════════════ -->
+  <div id="login-section" class="card">
+    <div class="card-title">Admin Login</div>
+    <div class="card-subtitle">
+      Enter the admin password to access the quarterly data upload portal.
+      This is separate from your regular dashboard login.
+    </div>
+
+    <div class="form-group">
+      <label for="admin-password">Admin Password</label>
+      <input type="password" id="admin-password" placeholder="Enter admin password"
+             autocomplete="current-password"
+             onkeydown="if(event.key==='Enter') doLogin()">
+    </div>
+    <div class="field-error" id="login-error"></div>
+    <button class="btn btn-primary" onclick="doLogin()" id="login-btn" style="margin-top:12px">
+      Sign In
+    </button>
+  </div>
+
+  <!-- ══ UPLOAD SECTION ═══════════════════════════════════ -->
+  <div id="upload-section" style="display:none">
+    <div class="card">
+      <div class="card-title">Upload Quarterly Data</div>
+      <div class="card-subtitle">
+        Upload a Supplement P Excel file to update the dashboard database.
+        The file can have any name — contents are detected automatically.
+      </div>
+
+      <!-- File picker -->
+      <div class="form-group">
+        <label for="file-input">Supplement P File</label>
+        <input type="file" id="file-input" accept=".xlsx">
+        <div class="field-error" id="file-error"></div>
+      </div>
+
+      <!-- Mode -->
+      <div class="form-group">
+        <label for="mode-select">What is this file?</label>
+        <select id="mode-select">
+          <option value="new">New quarter data — add to existing database</option>
+          <option value="replace">Replacement for existing quarter — delete previous load and reload</option>
+        </select>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Quarter selector — single combined dropdown -->
+      <div class="form-group">
+        <label for="period-select">Which quarter does this file cover?</label>
+        <select id="period-select" onchange="updatePeriodNote()"></select>
+        <div style="font-size:12px;color:#6B7280;margin-top:7px" id="period-note"></div>
+      </div>
+
+      <!-- Upload button -->
+      <button class="btn btn-primary" onclick="doUpload()" id="upload-btn" style="margin-top:24px">
+        Upload &amp; Process
+      </button>
+
+      <!-- Status panel -->
+      <div class="status-panel" id="status-panel">
+        <div class="status-title" id="status-title"></div>
+        <div class="status-detail" id="status-detail"></div>
+        <div class="status-meta" id="status-meta"></div>
+      </div>
+
+    </div>
+
+    <!-- ── Manage existing quarters ────────────────────────────── -->
+    <div class="card" id="manage-card" style="margin-top:24px">
+      <div class="card-title">Manage Loaded Quarters</div>
+      <div class="card-subtitle">
+        Review which quarters are currently in the database. Use <strong>Delete</strong> to remove a quarter that was loaded under the wrong period &mdash; then re-upload the file with the correct period selected.
+      </div>
+      <div id="quarters-list" style="margin-top:16px">
+        <span style="color:#6B7280;font-size:14px">Loading&hellip;</span>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ── Quarter helpers ──────────────────────────────────────────────────────────
+
+function fyToQuarterStr(fy, fyq) {
+  const startYear = parseInt(fy.split('-')[0], 10);
+  const endYear   = startYear + 1;
+  const map = { Q1: startYear + '-Q3', Q2: startYear + '-Q4',
+                Q3: endYear   + '-Q1', Q4: endYear   + '-Q2' };
+  return map[fyq] || null;
+}
+
+function fyqCalendarLabel(fy, fyq) {
+  const sy = parseInt(fy.split('-')[0], 10);
+  const ey = sy + 1;
+  const map = {
+    Q1: 'July \u2013 September ' + sy,
+    Q2: 'October \u2013 December ' + sy,
+    Q3: 'January \u2013 March ' + ey,
+    Q4: 'April \u2013 June ' + ey,
+  };
+  return map[fyq] || '—';
+}
+
+// Short month-range labels (e.g. "Jan–Mar 2025")
+function fyqShortLabel(fy, fyq) {
+  const sy = parseInt(fy.split('-')[0], 10);
+  const ey = sy + 1;
+  const map = {
+    Q1: 'Jul\u2013Sep ' + sy,
+    Q2: 'Oct\u2013Dec ' + sy,
+    Q3: 'Jan\u2013Mar ' + ey,
+    Q4: 'Apr\u2013Jun ' + ey,
+  };
+  return map[fyq] || '—';
+}
+
+// ── Populate period dropdown (grouped by FY, only completed quarters) ────────
+
+function quarterCompleted(fy, fyq) {
+  const now  = new Date();
+  const m    = now.getMonth() + 1;
+  const y    = now.getFullYear();
+  const calQs = fyToQuarterStr(fy, fyq);
+  if (!calQs) return false;
+  const [calY, calQ] = calQs.split('-Q').map(Number);
+  const endMonth = { 1: 3, 2: 6, 3: 9, 4: 12 }[calQ];
+  return calY < y || (calY === y && m > endMonth);
+}
+
+function initPeriodDropdown() {
+  const sel = document.getElementById('period-select');
+  const now = new Date();
+  const y   = now.getFullYear();
+  let defaultVal = null;
+
+  // Only show FY years that have at least one completed quarter
+  // Newest FY first, within each FY newest quarter first (Q4→Q1)
+  for (let fy_start = y; fy_start >= y - 5; fy_start--) {
+    const fyStr = fy_start + '-' + String(fy_start + 1).slice(-2);
+    const completedQs = ['Q4','Q3','Q2','Q1'].filter(q => quarterCompleted(fyStr, q));
+    if (!completedQs.length) continue;
+
+    const grp = document.createElement('optgroup');
+    grp.label = 'FY ' + fyStr;
+    sel.appendChild(grp);
+
+    completedQs.forEach(q => {
+      const calLabel = fyqCalendarLabel(fyStr, q);  // e.g. "January – March 2025"
+      const opt = document.createElement('option');
+      opt.value = fyStr + '|' + q;
+      opt.textContent = q + '  \u2014  ' + calLabel;
+      grp.appendChild(opt);
+
+      if (!defaultVal) defaultVal = opt.value;
+    });
+  }
+
+  if (defaultVal) sel.value = defaultVal;
+  updatePeriodNote();
+}
+
+function updatePeriodNote() {
+  const val  = document.getElementById('period-select').value;
+  const [fy, fyq] = val.split('|');
+  const el = document.getElementById('period-note');
+  if (el) el.textContent = fyqCalendarLabel(fy, fyq);
+}
+
+// ── Auth ────────────────────────────────────────────────────────────────────
+
+async function checkAuth() {
+  try {
+    const r = await fetch('/admin/status');
+    if (r.ok) {
+      showUploadSection();
+    }
+    // else stay on login form
+  } catch(e) {
+    // network error — stay on login form
+  }
+}
+
+function showUploadSection() {
+  document.getElementById('login-section').style.display = 'none';
+  document.getElementById('upload-section').style.display = '';
+  document.getElementById('nav-badge').style.display = '';
+  document.getElementById('logout-link').style.display = '';
+  loadQuartersList();
+}
+
+async function doLogin() {
+  const pw  = document.getElementById('admin-password').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-error');
+
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Signing in\u2026';
+
+  try {
+    const r = await fetch('/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    const j = await r.json();
+    if (j.ok) {
+      showUploadSection();
+    } else {
+      err.textContent = j.error || 'Incorrect password.';
+      err.style.display = '';
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    }
+  } catch(e) {
+    err.textContent = 'Could not reach server. Please try again.';
+    err.style.display = '';
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
+}
+
+// ── Upload ──────────────────────────────────────────────────────────────────
+
+async function doUpload() {
+  const fileInput = document.getElementById('file-input');
+  const fileErr   = document.getElementById('file-error');
+  const btn       = document.getElementById('upload-btn');
+  const panel     = document.getElementById('status-panel');
+
+  // Reset errors
+  fileErr.style.display = 'none';
+  panel.style.display = 'none';
+
+  if (!fileInput.files.length) {
+    fileErr.textContent = 'Please select a file before uploading.';
+    fileErr.style.display = '';
+    return;
+  }
+  if (!fileInput.files[0].name.toLowerCase().endsWith('.xlsx')) {
+    fileErr.textContent = 'File must be an Excel .xlsx file.';
+    fileErr.style.display = '';
+    return;
+  }
+
+  const [fy, fyq] = document.getElementById('period-select').value.split('|');
+  const mode = document.getElementById('mode-select').value;
+  const qs   = fyToQuarterStr(fy, fyq);
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Processing\u2026 this may take a minute';
+
+  const fd = new FormData();
+  fd.append('file', fileInput.files[0]);
+  fd.append('mode', mode);
+  fd.append('fy',   fy);
+  fd.append('fyq',  fyq);
+
+  try {
+    const r = await fetch('/admin/upload', { method: 'POST', body: fd });
+    const j = await r.json();
+    showStatus(j);
+  } catch(e) {
+    showStatus({ success: false, message: 'Upload failed: ' + e.message });
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Upload \u0026 Process';
+  }
+}
+
+function showStatus(j) {
+  const panel  = document.getElementById('status-panel');
+  const title  = document.getElementById('status-title');
+  const detail = document.getElementById('status-detail');
+  const meta   = document.getElementById('status-meta');
+
+  panel.className = 'status-panel ' + (j.success ? 'success' : 'error');
+  title.textContent = j.success ? '\u2713 Upload successful' : '\u2717 Upload failed';
+
+  if (j.success) {
+    const [fy, fyq] = document.getElementById('period-select').value.split('|');
+    detail.innerHTML =
+      'Period: <span class="mono">FY ' + fy + ' ' + fyq + '</span><br>' +
+      'Calendar: <span class="mono">' + fyqCalendarLabel(fy, fyq) + '</span><br>' +
+      'Measures loaded: <span class="mono">' + ((j.rows_loaded || 0).toLocaleString()) + '</span><br>' +
+      (j.message || '');
+  } else {
+    detail.textContent = j.message || 'An unknown error occurred.';
+  }
+
+  meta.textContent = j.timestamp ? 'Processed at ' + j.timestamp : '';
+  panel.style.display = '';
+  if (j.success) loadQuartersList();
+}
+
+// ── Manage quarters ───────────────────────────────────────────────────────────
+
+// Reverse-map a calendar quarter_str like '2025-Q1' → FY-first label parts
+// Returns: { primary: 'FY 2024-25 Q3', secondary: 'Jan–Mar 2025', full: 'FY 2024-25 Q3 · Jan–Mar 2025' }
+function calQsToFyLabel(qs) {
+  const m = qs.match(/^(\d{4})-Q(\d)$/);
+  if (!m) return { primary: qs, secondary: '', full: qs };
+  const y = parseInt(m[1], 10);
+  const q = parseInt(m[2], 10);
+  // Q1=Jan-Mar → FY (y-1)-y Q3  |  Q2=Apr-Jun → FY (y-1)-y Q4
+  // Q3=Jul-Sep → FY y-(y+1) Q1  |  Q4=Oct-Dec → FY y-(y+1) Q2
+  const fyMap = {
+    1: { fy: (y-1) + '-' + String(y).slice(-2),   fyq: 'Q3', months: 'Jan\u2013Mar ' + y },
+    2: { fy: (y-1) + '-' + String(y).slice(-2),   fyq: 'Q4', months: 'Apr\u2013Jun ' + y },
+    3: { fy: y + '-' + String(y+1).slice(-2),     fyq: 'Q1', months: 'Jul\u2013Sep ' + y },
+    4: { fy: y + '-' + String(y+1).slice(-2),     fyq: 'Q2', months: 'Oct\u2013Dec ' + y },
+  };
+  const info = fyMap[q];
+  if (!info) return { primary: qs, secondary: '', full: qs };
+  const primary   = 'FY ' + info.fy + ' ' + info.fyq;
+  const secondary = info.months;
+  return { primary, secondary, full: primary + '  \u00b7  ' + secondary };
+}
+
+async function loadQuartersList() {
+  const container = document.getElementById('quarters-list');
+  if (!container) return;
+  try {
+    const r = await fetch('/admin/quarters');
+    const j = await r.json();
+    if (!j.quarters || !j.quarters.length) {
+      container.innerHTML = '<p style="color:#6B7280;font-size:14px">No quarters loaded yet.</p>';
+      return;
+    }
+    const rows = j.quarters.map(q => {
+      const lbl = calQsToFyLabel(q.quarter_str);
+      const fmt = n => n ? n.toLocaleString() : '\u2014';
+      return `
+      <tr style="border-bottom:1px solid #F3F4F6">
+        <td style="padding:10px 12px">
+          <div style="font-weight:600;color:#1A1A2E">${lbl.primary}</div>
+          <div style="font-size:12px;color:#6B7280;margin-top:2px">${lbl.secondary}</div>
+        </td>
+        <td style="padding:10px 12px;text-align:right;color:#374151">${fmt(q.total_participants)}</td>
+        <td style="padding:10px 12px;text-align:right;color:#374151">${fmt(q.total_enrolled_dwellings)}</td>
+        <td style="padding:10px 12px;text-align:right;color:#374151">${fmt(q.pipeline)}</td>
+        <td style="padding:10px 12px;text-align:right">
+          <button onclick="deleteQuarter('${q.quarter_str}', '${lbl.primary}')"
+            style="background:#EF4444;color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px">
+            Delete
+          </button>
+        </td>
+      </tr>`;
+    }).join('');
+    container.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        <thead>
+          <tr style="border-bottom:2px solid #E5E7EB;color:#6B7280;font-size:11px;text-transform:uppercase;letter-spacing:.04em">
+            <th style="padding:6px 12px;text-align:left;font-weight:700">Financial Year Period</th>
+            <th style="padding:6px 12px;text-align:right;font-weight:700">Participants</th>
+            <th style="padding:6px 12px;text-align:right;font-weight:700">Enrolled Dwellings</th>
+            <th style="padding:6px 12px;text-align:right;font-weight:700">Pipeline</th>
+            <th style="padding:6px 12px;text-align:right;font-weight:700">Action</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  } catch(e) {
+    container.innerHTML = '<p style="color:#EF4444;font-size:14px">Could not load quarters: ' + e.message + '</p>';
+  }
+}
+
+async function deleteQuarter(qs, fyLabel) {
+  const label = fyLabel || calQsToFyLabel(qs).primary;
+  if (!confirm('Delete ALL data for ' + label + '?\n\nThis cannot be undone.')) return;
+  try {
+    const fd = new FormData();
+    fd.append('quarter_str', qs);
+    const r = await fetch('/admin/delete-quarter', { method: 'POST', body: fd });
+    const j = await r.json();
+    if (j.success) {
+      loadQuartersList();
+    } else {
+      alert('Delete failed: ' + (j.message || 'Unknown error'));
+    }
+  } catch(e) {
+    alert('Delete failed: ' + e.message);
+  }
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────────────
+initPeriodDropdown();
+checkAuth();
+</script>
+</body>
+</html>
