@@ -1082,6 +1082,40 @@ tbody td.num { font-family: 'DM Mono', monospace; }
       </div>
     </div>
 
+    <!-- RESIDENT COMPOSITION BY STOCK TYPE -->
+    <div style="margin-top:12px" id="section-resident-composition">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">New Build &amp; New Build (Refurbished)</div>
+              <div class="card-subtitle" id="res-newbuild-subtitle">Enrolled dwellings by max residents</div>
+            </div>
+            <div class="chart-dl-btns">
+              <button class="chart-btn" onclick="dlPNG('chart-res-newbuild','SDA_ResidentComp_NewBuild')" title="Download PNG">PNG</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="chart-res-newbuild" style="height:320px"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Existing &amp; Legacy Stock</div>
+              <div class="card-subtitle" id="res-existing-subtitle">Enrolled dwellings by max residents</div>
+            </div>
+            <div class="chart-dl-btns">
+              <button class="chart-btn" onclick="dlPNG('chart-res-existing','SDA_ResidentComp_Existing')" title="Download PNG">PNG</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div id="chart-res-existing" style="height:320px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- DETAILED DATA VIEW -->
     <div class="table-section" id="section-dwelling-table">
       <div class="table-header">
@@ -1897,6 +1931,57 @@ function renderBuildingTypeChart() {
 }
 
 // ══════════════════════════════════════════════════
+// RESIDENT COMPOSITION BY STOCK TYPE (two pie charts)
+// ══════════════════════════════════════════════════
+function renderResidentCompositionCharts() {
+  const q      = effectiveQ();
+  const labels = ['1 Resident', '2 Residents', '3 Residents', '4 Residents', '5+ Residents'];
+  const resNums = [1, 2, 3, 4, 5];
+  const colors  = ['#522E75', '#7B3FA0', '#9C6CC6', '#C4A8DC', '#E2D4F0'];
+
+  function buildSlice(rows) {
+    const totals = {};
+    (rows || []).filter(r => r.quarter_str === q && r.maxRes).forEach(r => {
+      totals[r.maxRes] = (totals[r.maxRes] || 0) + r.value;
+    });
+    return resNums.map(n => totals[n] || 0);
+  }
+
+  const nbValues = buildSlice(cache.nb11Raw);
+  const exValues = buildSlice(cache.ex12Raw);
+
+  const subtitle = fmtQ(q);
+  const nbEl = document.getElementById('res-newbuild-subtitle');
+  const exEl = document.getElementById('res-existing-subtitle');
+  if (nbEl) nbEl.textContent = `Enrolled dwellings by max residents — ${subtitle}`;
+  if (exEl) exEl.textContent = `Enrolled dwellings by max residents — ${subtitle}`;
+
+  const layout = {
+    margin: { t: 10, b: 10, l: 10, r: 10 },
+    showlegend: true,
+    legend: { orientation: 'h', y: -0.12, font: { size: 11 } },
+    plot_bgcolor: 'white', paper_bgcolor: 'white'
+  };
+  const config = { responsive: true, displayModeBar: false };
+
+  Plotly.newPlot('chart-res-newbuild', [{
+    type: 'pie', labels, values: nbValues,
+    marker: { colors },
+    textinfo: 'percent',
+    hovertemplate: '%{label}: %{value:,.0f} dwellings (%{percent})<extra></extra>',
+    hole: 0.35, textfont: { size: 12 }
+  }], layout, config);
+
+  Plotly.newPlot('chart-res-existing', [{
+    type: 'pie', labels, values: exValues,
+    marker: { colors },
+    textinfo: 'percent',
+    hovertemplate: '%{label}: %{value:,.0f} dwellings (%{percent})<extra></extra>',
+    hole: 0.35, textfont: { size: 12 }
+  }], layout, config);
+}
+
+// ══════════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════════
 async function boot() {
@@ -1932,6 +2017,7 @@ async function boot() {
     renderSDATypeChart();
     renderDesignCategoryChart();
     renderBuildingTypeChart();
+    renderResidentCompositionCharts();
     renderParticipantNeedChart();
     renderParticipantDCChart();
     renderFinancialChart();
@@ -3001,6 +3087,7 @@ function setDatasetFocus(focus) {
     'section-dc-analysis',
     'section-dwelling-dc',
     'section-dwelling-bt',
+    'section-resident-composition',
     'section-dwelling-table',
     'section-dwelling-growth',
     'section-supply-demand',
@@ -3147,6 +3234,7 @@ function refreshAll() {
   renderSDATypeChart();
   renderDesignCategoryChart();
   renderBuildingTypeChart();
+  renderResidentCompositionCharts();
   renderParticipantNeedChart();
   renderParticipantDCChart();
   renderFinancialChart();
