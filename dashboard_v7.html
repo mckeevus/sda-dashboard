@@ -563,9 +563,21 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     <!-- Dataset Focus -->
     <div class="filter-group">
       <span class="filter-label">Dataset Focus</span>
+      <div class="radio-item" onclick="setDatasetFocus('ep')">
+        <input type="radio" name="focus" id="focus-ep" checked>
+        <label for="focus-ep">Enrolled &amp; Pipeline</label>
+      </div>
+      <div class="radio-item" onclick="setDatasetFocus('spend')">
+        <input type="radio" name="focus" id="focus-spend">
+        <label for="focus-spend">SDA Spend</label>
+      </div>
       <div class="radio-item" onclick="setDatasetFocus('enrolled')">
-        <input type="radio" name="focus" id="focus-enrolled" checked>
-        <label for="focus-enrolled">Enrolled &amp; Pipeline</label>
+        <input type="radio" name="focus" id="focus-enrolled">
+        <label for="focus-enrolled">Enrolled</label>
+      </div>
+      <div class="radio-item" onclick="setDatasetFocus('pipeline')">
+        <input type="radio" name="focus" id="focus-pipeline">
+        <label for="focus-pipeline">Pipeline</label>
       </div>
       <div class="radio-item" onclick="setDatasetFocus('need')">
         <input type="radio" name="focus" id="focus-need">
@@ -758,7 +770,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- MIDDLE ROW -->
-    <div class="mid-row" id="section-dwelling-mid">
+    <div class="mid-row" id="section-dwelling-mid" data-focus="ep">
 
       <!-- Choropleth Map -->
       <div class="card">
@@ -842,10 +854,10 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- BOTTOM ROW -->
-    <div class="bottom-row" id="section-dwelling-bottom">
+    <div id="section-dwelling-bottom" style="display:flex;flex-direction:column;gap:12px">
 
       <!-- State Comparison -->
-      <div class="card">
+      <div class="card" data-focus="ep">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
             <div class="card-title">State Comparison</div>
@@ -861,9 +873,8 @@ tbody td.num { font-family: 'DM Mono', monospace; }
         </div>
       </div>
 
-      <!-- Enrolled Over Time + Pipeline Over Time side by side -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div class="card">
+      <!-- Enrolled Over Time -->
+      <div class="card" data-focus="enrolled">
           <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
             <div>
               <div class="card-title">Enrolled Dwellings Over Time</div>
@@ -878,7 +889,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
             <div id="chart-growth" style="height:280px"></div>
           </div>
         </div>
-        <div class="card">
+      <div class="card" data-focus="pipeline">
           <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
             <div>
               <div class="card-title">Pipeline Dwellings Over Time</div>
@@ -892,16 +903,15 @@ tbody td.num { font-family: 'DM Mono', monospace; }
           <div class="card-body" style="padding:20px 24px 16px 24px">
             <div id="chart-pipeline-ts" style="height:280px"></div>
           </div>
-        </div>
       </div>
 
     </div>
 
     <!-- PROVIDERS ROW -->
-    <div class="bottom-row" id="section-dwelling-providers">
+    <div id="section-dwelling-providers" style="display:flex;flex-direction:column;gap:12px">
 
       <!-- Active Providers by State -->
-      <div class="card">
+      <div class="card" data-focus="spend">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
             <div class="card-title">Active Providers by State</div>
@@ -918,7 +928,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
       </div>
 
       <!-- SDA Type Breakdown over time -->
-      <div class="card">
+      <div class="card" data-focus="enrolled">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
             <div class="card-title">Enrolled Dwellings by SDA Type</div>
@@ -937,7 +947,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- BUILDING TYPE COMPOSITION ANALYSIS -->
-    <div style="margin-top:12px" id="section-bt-analysis">
+    <div style="margin-top:12px" id="section-bt-analysis" data-focus="enrolled">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -975,7 +985,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- DESIGN CATEGORY COMPOSITION ANALYSIS -->
-    <div style="margin-top:12px" id="section-dc-analysis">
+    <div style="margin-top:12px" id="section-dc-analysis" data-focus="enrolled">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -1013,7 +1023,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- DESIGN CATEGORY CHART -->
-    <div style="margin-top:12px" id="section-dwelling-dc">
+    <div style="margin-top:12px" id="section-dwelling-dc" data-focus="enrolled pipeline">
       <div class="card">
         <div class="card-header">
           <div>
@@ -1038,7 +1048,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- BUILDING TYPE CHART -->
-    <div style="margin-top:12px" id="section-dwelling-bt">
+    <div style="margin-top:12px" id="section-dwelling-bt" data-focus="enrolled">
       <div class="card">
         <div class="card-header">
           <div>
@@ -1083,7 +1093,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- RESIDENT COMPOSITION BY STOCK TYPE -->
-    <div style="margin-top:12px" id="section-resident-composition">
+    <div style="margin-top:12px" id="section-resident-composition" data-focus="enrolled">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="card">
           <div class="card-header">
@@ -1117,7 +1127,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- DETAILED DATA VIEW -->
-    <div class="table-section" id="section-dwelling-table">
+    <div class="table-section" id="section-dwelling-table" data-focus="enrolled">
       <div class="table-header">
         <div class="table-header-left">
           <h3>Detailed Data View</h3>
@@ -1158,7 +1168,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- PARTICIPANT NEED ROW -->
-    <div style="margin-top:12px" id="section-need-participants">
+    <div style="margin-top:12px" id="section-need-participants" data-focus="need">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
         <!-- Participant Need over time -->
@@ -1205,7 +1215,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- SDA IN USE ANALYSIS SECTION -->
-    <div style="margin-top:12px" id="section-inuse-analysis">
+    <div style="margin-top:12px" id="section-inuse-analysis" data-focus="need">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -1247,7 +1257,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- SDA UTILISATION SECTION -->
-    <div style="margin-top:12px" id="section-need-utilisation">
+    <div style="margin-top:12px" id="section-need-utilisation" data-focus="need">
       <div class="card">
 
         <!-- Card header with controls -->
@@ -1355,7 +1365,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- FINANCIAL ROW -->
-    <div style="margin-top:12px" id="section-need-financial">
+    <div style="margin-top:12px" id="section-need-financial" data-focus="spend">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
         <!-- SDA vs SIL Committed Supports over time -->
@@ -1402,7 +1412,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- SA4 DWELLING GROWTH ANALYSIS -->
-    <div style="margin-top:12px" id="section-dwelling-growth">
+    <div style="margin-top:12px" id="section-dwelling-growth" data-focus="enrolled">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -1466,7 +1476,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- SUPPLY & DEMAND PIPELINE -->
-    <div style="margin-top:12px" id="section-supply-demand">
+    <div style="margin-top:12px" id="section-supply-demand" data-focus="ep">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -1535,7 +1545,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <!-- NATIONAL GROWTH RATE ANALYSIS -->
-    <div style="margin-top:12px" id="section-national-growth-rate">
+    <div style="margin-top:12px" id="section-national-growth-rate" data-focus="ep">
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -1613,6 +1623,25 @@ tbody td.num { font-family: 'DM Mono', monospace; }
       </div>
     </div>
 
+    <!-- PIPELINE DWELLINGS BY BUILDING TYPE & MAX RESIDENTS (new) -->
+    <div style="margin-top:12px" id="section-pipeline-bt-maxres" data-focus="pipeline">
+      <div class="card">
+        <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
+          <div>
+            <div class="card-title">Pipeline Dwellings by Building Type &amp; Max Residents</div>
+            <div class="card-subtitle" id="pl-btmr-subtitle">Pipeline (unfinished new build) by building type, stacked by max residents</div>
+          </div>
+          <div class="chart-dl-btns">
+            <button class="chart-btn" onclick="dlPNG('chart-pl-btmr','SDA_PipelineBuildingTypeMaxResidents')" title="Download PNG">PNG</button>
+            <button class="chart-btn" onclick="csvPipelineBtMaxRes()" title="Download CSV">CSV</button>
+          </div>
+        </div>
+        <div class="card-body" style="padding:20px 24px 16px 24px">
+          <div id="chart-pl-btmr" style="height:420px"></div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -1654,7 +1683,7 @@ let state = {
   prevQ: null,
   selectedState: 'All',
   selectedQuarter: null,   // null = latest
-  datasetFocus: 'enrolled',
+  datasetFocus: 'ep',
   dcMode: 'enrolled',      // Design category chart mode: 'enrolled' or 'pipeline'
   btMode: 'newbuild',      // Building type chart mode: 'newbuild' or 'existing'
   btMaxResidents: [1,2,3,4,5],  // Selected max residents (all by default)
@@ -1982,6 +2011,72 @@ function renderResidentCompositionCharts() {
 }
 
 // ══════════════════════════════════════════════════
+// PIPELINE DWELLINGS BY BUILDING TYPE & MAX RESIDENTS
+// Source: P.16 (pipeline). Respects State, DC, BT, MaxRes filters.
+// ══════════════════════════════════════════════════
+function renderPipelineBtMaxRes() {
+  const el = document.getElementById('chart-pl-btmr');
+  if (!el || !cache.pl16Raw) return;
+
+  const sel = state.selectedState;
+  const q   = effectiveQ();
+  const pl  = sel === 'All' ? cache.pl16Raw : cache.pl16State;
+  const stateFilter = r => sel === 'All' || r.geo_name === sel || r.state === sel;
+  const rows = applyDimFilters((pl || []).filter(stateFilter)).filter(r => r.quarter_str === q);
+
+  const subEl = document.getElementById('pl-btmr-subtitle');
+  if (subEl) subEl.textContent = `Pipeline dwellings by building type, stacked by max residents — ${fmtQ(q)}`;
+
+  const btOrder = ['Apartment', 'Villa/Duplex/Townhouse', 'House', 'Group home'];
+  const present = [...new Set(rows.map(r => r.bt))];
+  const buildingTypes = btOrder.filter(b => present.includes(b))
+    .concat(present.filter(b => !btOrder.includes(b)));
+
+  const resLabels = { 1:'1 Resident', 2:'2 Residents', 3:'3 Residents', 4:'4 Residents', 5:'5+ Residents' };
+  const resColors = { 1:'#522E75', 2:'#7B3FA0', 3:'#9C6CC6', 4:'#C4A8DC', 5:'#E2D4F0' };
+  const resNums = [1, 2, 3, 4, 5].filter(n => state.btMaxResidents.includes(n));
+
+  const traces = resNums.map(n => ({
+    x: buildingTypes,
+    y: buildingTypes.map(bt =>
+      rows.filter(r => r.bt === bt && r.maxRes === n).reduce((s, r) => s + r.value, 0) || 0),
+    name: resLabels[n], type: 'bar',
+    marker: { color: resColors[n] },
+    hovertemplate: '%{x} — ' + resLabels[n] + ': %{y:,.0f}<extra></extra>'
+  }));
+
+  Plotly.newPlot('chart-pl-btmr', traces, {
+    barmode: 'stack',
+    margin: { t: 10, r: 10, b: 70, l: 60 },
+    xaxis: { tickangle: -20, tickfont: { size: 11 }, showgrid: false },
+    yaxis: { tickfont: { size: 10 }, tickformat: ',.0f', gridcolor: '#F3F4F6' },
+    hovermode: 'closest',
+    legend: { orientation: 'h', y: -0.22, font: { size: 11 } },
+    plot_bgcolor: 'white', paper_bgcolor: 'white'
+  }, { responsive: true, displayModeBar: false });
+}
+
+function csvPipelineBtMaxRes() {
+  const sel = state.selectedState;
+  const q   = effectiveQ();
+  const pl  = sel === 'All' ? cache.pl16Raw : cache.pl16State;
+  const stateFilter = r => sel === 'All' || r.geo_name === sel || r.state === sel;
+  const rows = applyDimFilters((pl || []).filter(stateFilter)).filter(r => r.quarter_str === q);
+  const resLabels = { 1:'1', 2:'2', 3:'3', 4:'4', 5:'5+' };
+  const agg = {};
+  rows.forEach(r => {
+    const key = r.bt + '||' + (resLabels[r.maxRes] || r.maxRes);
+    agg[key] = (agg[key] || 0) + r.value;
+  });
+  const out = ['Building Type,Max Residents,Pipeline Dwellings'];
+  Object.keys(agg).forEach(k => {
+    const [bt, res] = k.split('||');
+    out.push(`"${bt}",${res},${agg[k]}`);
+  });
+  _downloadCSV(`SDA_PipelineBuildingTypeMaxResidents_${q}.csv`, out.join('\n'));
+}
+
+// ══════════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════════
 async function boot() {
@@ -2018,6 +2113,7 @@ async function boot() {
     renderDesignCategoryChart();
     renderBuildingTypeChart();
     renderResidentCompositionCharts();
+    renderPipelineBtMaxRes();
     renderParticipantNeedChart();
     renderParticipantDCChart();
     renderFinancialChart();
@@ -2042,8 +2138,8 @@ async function boot() {
     initPeriodSelectors();
     renderPeriodFeatures();
 
-    // Apply initial focus visibility (dwelling sections visible, need sections hidden)
-    setDatasetFocus('enrolled');
+    // Apply initial focus visibility (Enrolled & Pipeline by default)
+    setDatasetFocus('ep');
 
   } catch(e) {
     document.getElementById('main').innerHTML =
@@ -3072,54 +3168,30 @@ function setState(s) {
 
 function setDatasetFocus(focus) {
   state.datasetFocus = focus;
-  document.querySelectorAll('input[name="focus"]').forEach((r, i) => {
-    r.checked = (i === 0 && focus === 'enrolled') || (i === 1 && focus === 'need');
+
+  // Sync radio buttons
+  const radioId = { ep:'focus-ep', spend:'focus-spend', enrolled:'focus-enrolled', pipeline:'focus-pipeline', need:'focus-need' }[focus];
+  document.querySelectorAll('input[name="focus"]').forEach(r => { r.checked = (r.id === radioId); });
+
+  // Show only cards/sections tagged for this focus
+  document.querySelectorAll('[data-focus]').forEach(el => {
+    const keys = el.getAttribute('data-focus').split(/\s+/);
+    el.style.display = keys.includes(focus) ? '' : 'none';
   });
 
-  const isDwelling = focus === 'enrolled';
+  // The Design Category chart serves both Enrolled and Pipeline — switch its data to match
+  if (focus === 'pipeline')      setDCMode('pipeline');
+  else if (focus === 'enrolled') setDCMode('enrolled');
 
-  // Dwelling sections — show when Enrolled & Pipeline
-  const dwellingSections = [
-    'section-dwelling-mid',
-    'section-dwelling-bottom',
-    'section-dwelling-providers',
-    'section-bt-analysis',
-    'section-dc-analysis',
-    'section-dwelling-dc',
-    'section-dwelling-bt',
-    'section-resident-composition',
-    'section-dwelling-table',
-    'section-dwelling-growth',
-    'section-supply-demand',
-    'section-national-growth-rate',
-  ];
-  dwellingSections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = isDwelling ? '' : 'none';
-  });
+  // New pipeline report renders only when its focus is active
+  if (focus === 'pipeline') renderPipelineBtMaxRes();
 
-  // Participant/financial sections — show when Participant Need
-  const needSections = [
-    'section-need-participants',
-    'section-inuse-analysis',
-    'section-need-utilisation',
-    'section-need-financial',
-  ];
-  needSections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = isDwelling ? 'none' : '';
-  });
-
-  // Max Residents sidebar — only relevant in dwelling focus
+  // Max Residents sidebar filter only relevant to dwelling-level focuses
   const mrFilter = document.getElementById('filter-maxres');
-  if (mrFilter) mrFilter.style.display = isDwelling ? '' : 'none';
+  if (mrFilter) mrFilter.style.display = (focus === 'enrolled' || focus === 'pipeline') ? '' : 'none';
 
-  // Switch map metric to match focus, then re-render
-  if (!isDwelling) {
-    setMapMode('need');
-  } else {
-    setMapMode('enrolled');
-  }
+  // Map appears only in Enrolled & Pipeline focus; keep it on the enrolled metric
+  if (focus === 'ep') setMapMode('enrolled');
 }
 
 function setDCMode(mode) {
@@ -3235,6 +3307,7 @@ function refreshAll() {
   renderDesignCategoryChart();
   renderBuildingTypeChart();
   renderResidentCompositionCharts();
+  renderPipelineBtMaxRes();
   renderParticipantNeedChart();
   renderParticipantDCChart();
   renderFinancialChart();
