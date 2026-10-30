@@ -932,7 +932,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
             <div class="card-title">Enrolled Dwellings by SDA Type</div>
-            <div class="card-subtitle">New Build vs Existing vs Legacy over time</div>
+            <div class="card-subtitle">New Build, New Build Refurbishment, Existing and Legacy over time. Source: P.13; geography and SDA type filters apply. Building type, design category and resident filters do not apply.</div>
           </div>
           <div class="chart-dl-btns">
             <button class="chart-btn" onclick="dlPNG('chart-sda-type','SDA_TypeBreakdown')" title="Download PNG">PNG</button>
@@ -944,6 +944,20 @@ tbody td.num { font-family: 'DM Mono', monospace; }
         </div>
       </div>
 
+    </div>
+
+    <div class="card" data-focus="enrolled" style="margin-top:12px">
+      <div class="card-header"><div>
+        <div class="card-title">Growth in Enrolled Dwellings by State and Territory</div>
+        <div class="card-subtitle" id="enrolled-growth-note"></div>
+      </div><button class="chart-btn" onclick="dlPNG('chart-enrolled-state-growth','SDA_StateGrowth')">PNG</button></div>
+      <div class="card-body" style="padding:20px 24px">
+        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px">
+          <label>Start quarter <select id="enrolled-growth-start" onchange="renderEnrolledStateGrowth()"></select></label>
+          <label>End quarter <select id="enrolled-growth-end" onchange="renderEnrolledStateGrowth()"></select></label>
+        </div>
+        <div id="chart-enrolled-state-growth" style="height:340px"></div>
+      </div>
     </div>
 
     <!-- BUILDING TYPE COMPOSITION ANALYSIS -->
@@ -2110,6 +2124,7 @@ async function boot() {
     renderTable();
     renderProvidersStateChart();
     renderSDATypeChart();
+  renderEnrolledStateGrowth();
     renderDesignCategoryChart();
     renderBuildingTypeChart();
     renderResidentCompositionCharts();
@@ -2998,65 +3013,6 @@ function renderProvidersStateChart() {
 // Derived from P.11 (New Build) + P.12 (Existing/Legacy)
 // Respects all global sidebar filters (BT, DC, Max Residents, SDA Type)
 // ══════════════════════════════════════════════════
-function renderSDATypeChart() {
-  const sel = state.selectedState;
-  const qs  = state.quarters;
-
-  // Pick the right geo-level cache
-  const nb11 = sel === 'All' ? cache.nb11Raw   : cache.nb11State;
-  const ex12 = sel === 'All' ? cache.ex12Raw   : cache.ex12State;
-
-  // Filter to selected state rows when needed
-  const stateFilter = rows => sel === 'All' ? rows :
-    rows.filter(r => r.geo_name === sel || r.state === sel);
-
-  // Apply BT / DC / MaxRes dimension filters
-  const nbFiltered = applyDimFilters(stateFilter(nb11 || []));
-  const exFiltered = applyDimFilters(stateFilter(ex12 || []));
-
-  // Split ex12 into Existing vs Legacy based on parseDims.isLegacy flag
-  const existingRows = exFiltered.filter(r => !r.isLegacy);
-  const legacyRows   = exFiltered.filter(r =>  r.isLegacy);
-
-  // Check which SDA types the user wants shown
-  const selTypes = getSelectedSDATypes();
-  const wantNB  = selTypes.includes('New Build') || selTypes.includes('New Build (refurbished)');
-  const wantEx  = selTypes.includes('Existing');
-  const wantLeg = selTypes.includes('Legacy');
-
-  const series = {
-    'New Build':  {},
-    'Existing':   {},
-    'Legacy':     {},
-  };
-  if (wantNB)  nbFiltered.forEach(r => { series['New Build'][r.quarter_str] = (series['New Build'][r.quarter_str]||0) + r.value; });
-  if (wantEx)  existingRows.forEach(r => { series['Existing'][r.quarter_str]  = (series['Existing'][r.quarter_str] ||0) + r.value; });
-  if (wantLeg) legacyRows.forEach(r => { series['Legacy'][r.quarter_str]    = (series['Legacy'][r.quarter_str]   ||0) + r.value; });
-
-  const typeConfig = [
-    { key: 'New Build',  color: '#522E75', show: wantNB  },
-    { key: 'Existing',   color: '#3949AB', show: wantEx  },
-    { key: 'Legacy',     color: '#90CAF9', show: wantLeg },
-  ];
-
-  const traces = typeConfig.filter(t => t.show).map(t => ({
-    x: qs.map(fmtQ),
-    y: qs.map(q => series[t.key]?.[q] ?? null),
-    name: t.key, type: 'scatter', mode: 'lines+markers', connectgaps: true,
-    line: { color: t.color, width: 2 }, marker: { size: 5 },
-    hovertemplate: `<b>${t.key}</b>: %{y:,.0f}<extra></extra>`
-  }));
-
-  Plotly.newPlot('chart-sda-type', traces, {
-    margin: { t: 10, r: 10, b: 100, l: 60 },
-    xaxis: { tickangle: -35, tickfont: { size: 10 }, showgrid: false },
-    yaxis: { tickformat: ',.0f', gridcolor: '#F3F4F6', tickfont: { size: 10 } },
-    hovermode: 'x unified',
-    legend: { orientation: 'h', y: -0.28, font: { size: 11 } },
-    plot_bgcolor: 'white', paper_bgcolor: 'white'
-  }, { responsive: true, displayModeBar: false });
-}
-
 // ══════════════════════════════════════════════════
 // DATA TABLE
 // ══════════════════════════════════════════════════
@@ -3304,6 +3260,7 @@ function refreshAll() {
   renderTable();
   renderProvidersStateChart();
   renderSDATypeChart();
+  renderEnrolledStateGrowth();
   renderDesignCategoryChart();
   renderBuildingTypeChart();
   renderResidentCompositionCharts();
@@ -5206,23 +5163,6 @@ function csvProviders() {
 }
 
 // SDA Type Over Time — chart-sda-type
-function csvSDAType() {
-  const sel  = state.selectedState;
-  const qs   = state.quarters;
-  const nb11 = sel === 'All' ? cache.nb11Raw   : cache.nb11State;
-  const ex12 = sel === 'All' ? cache.ex12Raw   : cache.ex12State;
-  const stf  = rows => sel === 'All' ? rows : rows.filter(r => r.geo_name === sel || r.state === sel);
-  const nbF  = applyDimFilters(stf(nb11||[]));
-  const exF  = applyDimFilters(stf(ex12||[]));
-  const series = { 'New Build': {}, 'Existing': {}, 'Legacy': {} };
-  nbF.forEach(r => { series['New Build'][r.quarter_str] = (series['New Build'][r.quarter_str]||0) + r.value; });
-  exF.filter(r => !r.isLegacy).forEach(r => { series['Existing'][r.quarter_str] = (series['Existing'][r.quarter_str]||0) + r.value; });
-  exF.filter(r =>  r.isLegacy).forEach(r => { series['Legacy'][r.quarter_str]   = (series['Legacy'][r.quarter_str]  ||0) + r.value; });
-  const rows = ['Quarter,New Build,Existing,Legacy'];
-  qs.forEach(q => rows.push(`${fmtQ(q)},${series['New Build'][q]||0},${series['Existing'][q]||0},${series['Legacy'][q]||0}`));
-  _downloadCSV(`SDA_TypeBreakdown_${effectiveQ()}.csv`, rows.join('\n'));
-}
-
 // Design Category — chart-design-category
 function csvDesignCategory() {
   const isEnrolled = state.dcMode === 'enrolled';
@@ -5441,6 +5381,103 @@ function fmtQ(q) {
 // ══════════════════════════════════════════════════
 // STARTUP — preload dataset map then boot
 // ══════════════════════════════════════════════════
+// Build-type aggregates preserve the new-build/refurbishment distinction in P.13.
+const ENROLLED_TYPES = [
+  { key: 'New Build', label: 'New Build', filter: 'New Build', color: '#522E75' },
+  { key: 'New Build (Refurbishment)', label: 'New Build Refurbishment', filter: 'New Build (refurbished)', color: '#00897B' },
+  { key: 'Existing', label: 'Existing', filter: 'Existing', color: '#3949AB' },
+  { key: 'Legacy', label: 'Legacy', filter: 'Legacy', color: '#90CAF9' }
+];
+
+function enrolledTypeSeries() {
+  const selected = getSelectedSDATypes();
+  return ENROLLED_TYPES.filter(t => selected.includes(t.filter)).map(t => {
+    const values = {};
+    (cache.dwSa3Raw?.bt || []).filter(r =>
+      r.measure_name === t.key &&
+      (state.selectedState === 'All' ? r.geo_type === 'Australia' :
+        r.geo_type === 'State' && (r.geo_name === state.selectedState || r.state === state.selectedState))
+    ).forEach(r => { values[r.quarter_str] = (values[r.quarter_str] ?? 0) + r.value; });
+    return { ...t, values };
+  });
+}
+
+function renderSDATypeChart() {
+  const traces = enrolledTypeSeries().map(t => ({
+    x: state.quarters.map(fmtQ), y: state.quarters.map(q => t.values[q] ?? null),
+    name: t.label, type: 'scatter', mode: 'lines+markers', connectgaps: false,
+    line: { color: t.color, width: 2 }, marker: { size: 5 },
+    hovertemplate: `<b>${t.label}</b>: %{y:,.0f}<extra></extra>`
+  }));
+  Plotly.newPlot('chart-sda-type', traces, {
+    margin: { t: 10, r: 10, b: 110, l: 60 },
+    xaxis: { tickangle: -35, tickfont: { size: 10 }, showgrid: false },
+    yaxis: { tickformat: ',.0f', gridcolor: '#F3F4F6' }, hovermode: 'x unified',
+    legend: { orientation: 'h', y: -0.3, font: { size: 11 } },
+    plot_bgcolor: 'white', paper_bgcolor: 'white'
+  }, { responsive: true, displayModeBar: false });
+}
+
+function csvSDAType() {
+  const series = enrolledTypeSeries();
+  const rows = [['Quarter', ...series.map(t => t.label)].join(',')];
+  state.quarters.forEach(q => rows.push([fmtQ(q), ...series.map(t => t.values[q] ?? '')].join(',')));
+  _downloadCSV(`SDA_TypeBreakdown_${effectiveQ()}.csv`, rows.join('\n'));
+}
+
+function enrolledGrowthTotals() {
+  const totals = {};
+  // Prefer the published Total; otherwise sum only the four stock categories.
+  const published = new Set();
+  const rows = (cache.dwSa3Raw?.bt || []).filter(r => r.geo_type === 'State');
+  rows.filter(r => r.measure_name === 'Total').forEach(r => {
+    const key = `${r.state || r.geo_name}|${r.quarter_str}`;
+    totals[key] = r.value;
+    published.add(key);
+  });
+  rows.filter(r => ENROLLED_TYPES.some(t => t.key === r.measure_name)).forEach(r => {
+    const key = `${r.state || r.geo_name}|${r.quarter_str}`;
+    if (!published.has(key)) totals[key] = (totals[key] ?? 0) + r.value;
+  });
+  return totals;
+}
+
+function growthQuarterLabel(q) {
+  const match = q.match(/^(\d{4})-Q([1-4])$/);
+  return match ? `${['March', 'June', 'September', 'December'][Number(match[2]) - 1]} ${match[1]} (${fmtQ(q)})` : fmtQ(q);
+}
+
+function renderEnrolledStateGrowth() {
+  const totals = enrolledGrowthTotals();
+  const quarters = [...new Set((cache.dwSa3Raw?.bt || []).filter(r => r.geo_type === 'State').map(r => r.quarter_str))].sort();
+  const start = document.getElementById('enrolled-growth-start');
+  const end = document.getElementById('enrolled-growth-end');
+  if (!start.options.length) {
+    [start, end].forEach(el => { el.innerHTML = quarters.map(q => `<option value="${q}">${growthQuarterLabel(q)}</option>`).join(''); });
+    start.value = quarters.includes('2024-Q2') ? '2024-Q2' : (quarters[0] || '');
+    end.value = quarters.includes('2026-Q2') ? '2026-Q2' : (quarters.at(-1) || '');
+  }
+  const valid = start.value && end.value && start.value < end.value;
+  const records = STATES_ORDER.map(s => {
+    const from = totals[`${s}|${start.value}`];
+    const to = totals[`${s}|${end.value}`];
+    return { state: s, from, to, growth: from == null || to == null ? null : to - from };
+  });
+  document.getElementById('enrolled-growth-note').textContent = !valid ?
+    'Select an end quarter later than the start quarter.' :
+    `${growthQuarterLabel(start.value)} to ${growthQuarterLabel(end.value)}. All enrolled stock, all states and territories; sidebar filters do not apply. Missing observations appear as gaps.`;
+  Plotly.newPlot('chart-enrolled-state-growth', valid ? [{
+    x: records.map(r => r.state), y: records.map(r => r.growth), type: 'bar',
+    marker: { color: records.map(r => r.growth < 0 ? '#C62828' : '#522E75') },
+    customdata: records.map(r => [r.from, r.to, r.from > 0 ? `${((r.to-r.from)/r.from*100).toFixed(1)}%` : 'N/A']),
+    hovertemplate: '<b>%{x}</b><br>Start: %{customdata[0]:,.0f}<br>End: %{customdata[1]:,.0f}<br>Growth: %{y:,.0f}<br>Growth rate: %{customdata[2]}<extra></extra>'
+  }] : [], {
+    margin: { t: 15, r: 15, b: 45, l: 70 },
+    xaxis: { type: 'category' }, yaxis: { title: 'Growth in enrolled dwellings', tickformat: ',.0f', zeroline: true, gridcolor: '#F3F4F6' },
+    plot_bgcolor: 'white', paper_bgcolor: 'white', showlegend: false
+  }, { responsive: true, displayModeBar: false });
+}
+
 preloadDatasetMap().then(boot).catch(e => {
   document.getElementById('main').innerHTML =
     `<div class="error-banner">❌ Cannot connect to Flask server. Make sure START_DASHBOARD.bat is running.<br><small>${e}</small></div>`;
@@ -5448,3 +5485,4 @@ preloadDatasetMap().then(boot).catch(e => {
 </script>
 </body>
 </html>
+
