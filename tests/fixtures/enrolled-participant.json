@@ -1,0 +1,1895 @@
+{
+  "description": "Aggregate live API rows captured 2026-10-30. P.13 is absent in production; enrolled types must come from P.4.",
+  "quarters": [
+    "2024-Q2",
+    "2026-Q2"
+  ],
+  "datasets": [
+    {
+      "source_table": "Table P.4",
+      "dataset_id": 9
+    },
+    {
+      "source_table": "Table P.9",
+      "dataset_id": 14
+    },
+    {
+      "source_table": "Table P.11",
+      "dataset_id": 1
+    },
+    {
+      "source_table": "Table P.12",
+      "dataset_id": 2
+    },
+    {
+      "source_table": "Table P.16",
+      "dataset_id": 5
+    }
+  ],
+  "enrolledAustralia": [
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": null,
+      "value": 3849.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": null,
+      "value": 180.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": null,
+      "value": 5335.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": null,
+      "value": 123.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": null,
+      "value": 9487.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 3670.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 151.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 10242.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 172.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 14235.0,
+      "year": 2026
+    }
+  ],
+  "enrolledState": [
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "ACT",
+      "value": 113.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "ACT",
+      "value": 0.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "ACT",
+      "value": 63.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "ACT",
+      "value": 0.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "ACT",
+      "value": 176.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NSW",
+      "value": 1261.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NSW",
+      "value": 53.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NSW",
+      "value": 1449.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NSW",
+      "value": 24.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NSW",
+      "value": 2787.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NT",
+      "value": 17.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NT",
+      "value": 0.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NT",
+      "value": 67.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NT",
+      "value": 2.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "NT",
+      "value": 86.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "QLD",
+      "value": 358.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "QLD",
+      "value": 24.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "QLD",
+      "value": 1612.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "QLD",
+      "value": 18.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "QLD",
+      "value": 2012.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "SA",
+      "value": 914.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "SA",
+      "value": 5.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "SA",
+      "value": 441.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "SA",
+      "value": 3.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "SA",
+      "value": 1363.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "TAS",
+      "value": 16.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "TAS",
+      "value": 3.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "TAS",
+      "value": 65.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "TAS",
+      "value": 4.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "TAS",
+      "value": 88.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "VIC",
+      "value": 1160.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "VIC",
+      "value": 94.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "VIC",
+      "value": 1310.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "VIC",
+      "value": 72.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "VIC",
+      "value": 2636.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "WA",
+      "value": 10.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "WA",
+      "value": 1.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "WA",
+      "value": 328.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "WA",
+      "value": 0.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2024-Q2",
+      "state": "WA",
+      "value": 339.0,
+      "year": 2024
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 110.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 102.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 213.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1179.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 50.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 2128.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 38.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 3395.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 15.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 132.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 2.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 149.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 346.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 21.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 2594.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 17.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 2978.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 866.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 996.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 7.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 1873.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 13.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 3.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 163.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 183.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 1132.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 72.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 2883.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 103.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 4190.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Existing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 9.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Legacy",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "New Build",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 1244.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "New Build (refurbished)",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 1254.0,
+      "year": 2026
+    }
+  ],
+  "participantState": [
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 79.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 72.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 76.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 106.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 13.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "ACT",
+      "value": 346.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 1655.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 1334.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 2210.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 2345.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 405.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NSW",
+      "value": 7949.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 107.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 75.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 80.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 19.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 23.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "NT",
+      "value": 304.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 1415.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 1069.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 1054.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 504.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 320.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "QLD",
+      "value": 4362.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 556.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 462.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 815.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 472.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 166.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "SA",
+      "value": 2471.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 106.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 99.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 164.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 104.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 33.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "TAS",
+      "value": 506.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 1293.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 1252.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 2094.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 2098.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 534.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "VIC",
+      "value": 7271.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 545.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 514.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 401.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 246.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 127.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2025-Q2",
+      "state": "WA",
+      "value": 1833.0,
+      "year": 2025
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 84.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 75.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 84.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 97.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 14.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "ACT",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "ACT",
+      "value": 354.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1867.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1407.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 2381.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 2007.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 440.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 8102.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 121.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 76.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 75.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 18.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 25.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NT",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NT",
+      "value": 315.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 1564.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 1107.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 1077.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 470.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 348.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "QLD",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "QLD",
+      "value": 4566.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 644.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 473.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 847.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 407.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 186.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "SA",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "SA",
+      "value": 2557.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 125.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 98.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 174.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 85.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 34.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "TAS",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "TAS",
+      "value": 516.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 1451.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 1355.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 2287.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 1700.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 574.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "VIC",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "VIC",
+      "value": 7367.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: FA",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 615.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: HPS",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 525.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: IL",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 401.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Missing",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 207.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 133.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "WA",
+      "geo_type": "State",
+      "measure_name": "DC: Total",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "WA",
+      "value": 1881.0,
+      "year": 2026
+    }
+  ]
+}

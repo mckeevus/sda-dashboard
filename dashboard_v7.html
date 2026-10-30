@@ -932,7 +932,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
           <div>
             <div class="card-title">Enrolled Dwellings by SDA Type</div>
-            <div class="card-subtitle">New Build, New Build Refurbishment, Existing and Legacy over time. Source: P.13; geography and SDA type filters apply. Building type, design category and resident filters do not apply.</div>
+            <div class="card-subtitle">New Build, New Build Refurbishment, Existing and Legacy over time. Geography and SDA type filters apply; building type, design category and resident filters do not apply.</div>
           </div>
           <div class="chart-dl-btns">
             <button class="chart-btn" onclick="dlPNG('chart-sda-type','SDA_TypeBreakdown')" title="Download PNG">PNG</button>
@@ -947,14 +947,17 @@ tbody td.num { font-family: 'DM Mono', monospace; }
     </div>
 
     <div class="card" data-focus="enrolled" style="margin-top:12px">
-      <div class="card-header"><div>
+      <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between"><div>
         <div class="card-title">Growth in Enrolled Dwellings by State and Territory</div>
         <div class="card-subtitle" id="enrolled-growth-note"></div>
-      </div><button class="chart-btn" onclick="dlPNG('chart-enrolled-state-growth','SDA_StateGrowth')">PNG</button></div>
+      </div><div class="chart-dl-btns">
+        <button class="chart-btn" onclick="dlPNG('chart-enrolled-state-growth','SDA_StateGrowth')">PNG</button>
+        <button class="chart-btn" onclick="csvEnrolledStateGrowth()">CSV</button>
+      </div></div>
       <div class="card-body" style="padding:20px 24px">
         <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px">
-          <label>Start quarter <select id="enrolled-growth-start" onchange="renderEnrolledStateGrowth()"></select></label>
-          <label>End quarter <select id="enrolled-growth-end" onchange="renderEnrolledStateGrowth()"></select></label>
+          <label>Start quarter <select id="enrolled-growth-start" style="font-size:12px;padding:6px 8px;border:1px solid var(--grey-200);border-radius:6px" onchange="renderEnrolledStateGrowth()"></select></label>
+          <label>End quarter <select id="enrolled-growth-end" style="font-size:12px;padding:6px 8px;border:1px solid var(--grey-200);border-radius:6px" onchange="renderEnrolledStateGrowth()"></select></label>
         </div>
         <div id="chart-enrolled-state-growth" style="height:340px"></div>
       </div>
@@ -1225,6 +1228,22 @@ tbody td.num { font-family: 'DM Mono', monospace; }
           </div>
         </div>
 
+      </div>
+    </div>
+
+    <div class="card" id="section-need-state-dc" data-focus="need" style="margin-top:12px">
+      <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div>
+          <div class="card-title">Participant Need by State and Territory — Design Category</div>
+          <div class="card-subtitle" id="pdc-state-subtitle"></div>
+        </div>
+        <div class="chart-dl-btns">
+          <button class="chart-btn" onclick="dlPNG('chart-pdc-state','SDA_ParticipantNeedStateDC')" title="Download PNG">PNG</button>
+          <button class="chart-btn" onclick="csvParticipantStateDC()" title="Download CSV">CSV</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:20px 24px 16px">
+        <div id="chart-pdc-state" style="height:430px"></div>
       </div>
     </div>
 
@@ -1727,6 +1746,8 @@ let cache = {
   enrolledTs: null,
   pipelineTs: null,
   enrolledState: null,
+  enrolledTypeRaw: null,   // P.4 stock types, Australia (includes refurbishment separately)
+  enrolledTypeState: null, // P.4 stock types and published totals, State
   pipelineState: null,
   // Unchanged sources
   needTs:      null,  // P.9
@@ -2131,6 +2152,7 @@ async function boot() {
     renderPipelineBtMaxRes();
     renderParticipantNeedChart();
     renderParticipantDCChart();
+    renderParticipantStateDC();
     renderFinancialChart();
     renderFinancialStateChart();
 
@@ -2163,12 +2185,13 @@ async function boot() {
 }
 
 async function loadAllData() {
+  if (!datasetId('Table P.4')) throw new Error('Enrolled dwelling stock data (P.4) is unavailable.');
   // Fetch P.11 (New Build), P.12 (Existing+Legacy), P.16 (Pipeline) at all geo levels
   // plus P.9 (Need) and P.3 (Providers)
   const [nb11, nb11s, nb11sa4,
          ex12, ex12s, ex12sa4,
          pl16, pl16s, pl16sa4,
-         need, sa4Need] =
+         need, sa4Need, enrolledTypes, enrolledTypesState] =
     await Promise.all([
       tsPost({ dataset_id: datasetId('Table P.11'), geo_type: 'Australia' }),
       tsPost({ dataset_id: datasetId('Table P.11'), geo_type: 'State' }),
@@ -2181,6 +2204,8 @@ async function loadAllData() {
       tsPost({ dataset_id: datasetId('Table P.16'), geo_type: 'SA4' }),
       tsPost({ dataset_id: datasetId('Table P.9'),  geo_type: 'Australia' }),
       tsPost({ dataset_id: datasetId('Table P.9'),  geo_type: 'SA4' }),
+      tsPost({ dataset_id: datasetId('Table P.4'),  geo_type: 'Australia' }),
+      tsPost({ dataset_id: datasetId('Table P.4'),  geo_type: 'State' }),
     ]);
 
   // Providers via dedicated endpoint
@@ -2203,6 +2228,8 @@ async function loadAllData() {
   cache.participantDCRaw = participantDCResult;
   cache.financialRaw     = financialResult;
   cache.dwSa3Raw         = dwSa3Result;
+  cache.enrolledTypeRaw  = enrolledTypes;
+  cache.enrolledTypeState = enrolledTypesState;
   cache.utilisationRaw   = utilisationResult;
   cache.capacityRaw      = capacityResult;
   cache.demandProjections = demandResult;
@@ -3137,7 +3164,12 @@ function setDatasetFocus(focus) {
 
   // The Design Category chart serves both Enrolled and Pipeline — switch its data to match
   if (focus === 'pipeline')      setDCMode('pipeline');
-  else if (focus === 'enrolled') setDCMode('enrolled');
+  else if (focus === 'enrolled') {
+    setDCMode('enrolled');
+    renderSDATypeChart();
+    renderEnrolledStateGrowth();
+  }
+  if (focus === 'need') renderParticipantStateDC();
 
   // New pipeline report renders only when its focus is active
   if (focus === 'pipeline') renderPipelineBtMaxRes();
@@ -3267,6 +3299,7 @@ function refreshAll() {
   renderPipelineBtMaxRes();
   renderParticipantNeedChart();
   renderParticipantDCChart();
+  renderParticipantStateDC();
   renderFinancialChart();
   renderFinancialStateChart();
   renderGrowthAnalysis();
@@ -5381,19 +5414,20 @@ function fmtQ(q) {
 // ══════════════════════════════════════════════════
 // STARTUP — preload dataset map then boot
 // ══════════════════════════════════════════════════
-// Build-type aggregates preserve the new-build/refurbishment distinction in P.13.
+// P.4 contains the published stock types and totals; P.13 is absent from the database.
 const ENROLLED_TYPES = [
   { key: 'New Build', label: 'New Build', filter: 'New Build', color: '#522E75' },
-  { key: 'New Build (Refurbishment)', label: 'New Build Refurbishment', filter: 'New Build (refurbished)', color: '#00897B' },
+  { key: 'New Build (refurbished)', label: 'New Build Refurbishment', filter: 'New Build (refurbished)', color: '#00897B' },
   { key: 'Existing', label: 'Existing', filter: 'Existing', color: '#3949AB' },
   { key: 'Legacy', label: 'Legacy', filter: 'Legacy', color: '#90CAF9' }
 ];
 
 function enrolledTypeSeries() {
   const selected = getSelectedSDATypes();
+  const source = state.selectedState === 'All' ? cache.enrolledTypeRaw : cache.enrolledTypeState;
   return ENROLLED_TYPES.filter(t => selected.includes(t.filter)).map(t => {
     const values = {};
-    (cache.dwSa3Raw?.bt || []).filter(r =>
+    (source || []).filter(r =>
       r.measure_name === t.key &&
       (state.selectedState === 'All' ? r.geo_type === 'Australia' :
         r.geo_type === 'State' && (r.geo_name === state.selectedState || r.state === state.selectedState))
@@ -5429,15 +5463,21 @@ function enrolledGrowthTotals() {
   const totals = {};
   // Prefer the published Total; otherwise sum only the four stock categories.
   const published = new Set();
-  const rows = (cache.dwSa3Raw?.bt || []).filter(r => r.geo_type === 'State');
+  const rows = cache.enrolledTypeState || [];
   rows.filter(r => r.measure_name === 'Total').forEach(r => {
     const key = `${r.state || r.geo_name}|${r.quarter_str}`;
     totals[key] = r.value;
     published.add(key);
   });
+  const categories = {};
   rows.filter(r => ENROLLED_TYPES.some(t => t.key === r.measure_name)).forEach(r => {
     const key = `${r.state || r.geo_name}|${r.quarter_str}`;
-    if (!published.has(key)) totals[key] = (totals[key] ?? 0) + r.value;
+    (categories[key] ||= {})[r.measure_name] = r.value;
+  });
+  Object.entries(categories).forEach(([key, values]) => {
+    if (!published.has(key) && ENROLLED_TYPES.every(t => Number.isFinite(values[t.key]))) {
+      totals[key] = ENROLLED_TYPES.reduce((sum, t) => sum + values[t.key], 0);
+    }
   });
   return totals;
 }
@@ -5449,7 +5489,7 @@ function growthQuarterLabel(q) {
 
 function renderEnrolledStateGrowth() {
   const totals = enrolledGrowthTotals();
-  const quarters = [...new Set((cache.dwSa3Raw?.bt || []).filter(r => r.geo_type === 'State').map(r => r.quarter_str))].sort();
+  const quarters = [...new Set((cache.enrolledTypeState || []).map(r => r.quarter_str))].sort();
   const start = document.getElementById('enrolled-growth-start');
   const end = document.getElementById('enrolled-growth-end');
   if (!start.options.length) {
@@ -5458,12 +5498,9 @@ function renderEnrolledStateGrowth() {
     end.value = quarters.includes('2026-Q2') ? '2026-Q2' : (quarters.at(-1) || '');
   }
   const valid = start.value && end.value && start.value < end.value;
-  const records = STATES_ORDER.map(s => {
-    const from = totals[`${s}|${start.value}`];
-    const to = totals[`${s}|${end.value}`];
-    return { state: s, from, to, growth: from == null || to == null ? null : to - from };
-  });
-  document.getElementById('enrolled-growth-note').textContent = !valid ?
+  const records = enrolledStateGrowthRecords(start.value, end.value, totals);
+  document.getElementById('enrolled-growth-note').textContent = !quarters.length ?
+    'No enrolled dwelling stock data is available.' : !valid ?
     'Select an end quarter later than the start quarter.' :
     `${growthQuarterLabel(start.value)} to ${growthQuarterLabel(end.value)}. All enrolled stock, all states and territories; sidebar filters do not apply. Missing observations appear as gaps.`;
   Plotly.newPlot('chart-enrolled-state-growth', valid ? [{
@@ -5478,6 +5515,95 @@ function renderEnrolledStateGrowth() {
   }, { responsive: true, displayModeBar: false });
 }
 
+function enrolledStateGrowthRecords(startQ, endQ, totals = enrolledGrowthTotals()) {
+  return STATES_ORDER.map(s => {
+    const from = totals[`${s}|${startQ}`];
+    const to = totals[`${s}|${endQ}`];
+    return { state: s, from, to, growth: from == null || to == null ? null : to - from };
+  });
+}
+
+function csvEnrolledStateGrowth() {
+  const startQ = document.getElementById('enrolled-growth-start').value;
+  const endQ = document.getElementById('enrolled-growth-end').value;
+  if (!startQ || !endQ || startQ >= endQ) return;
+  const rows = ['State,Start Quarter,End Quarter,Start Dwellings,End Dwellings,Growth,Growth (%)'];
+  enrolledStateGrowthRecords(startQ, endQ).forEach(r => rows.push([
+    r.state, growthQuarterLabel(startQ), growthQuarterLabel(endQ), r.from ?? '', r.to ?? '', r.growth ?? '',
+    r.from > 0 && r.growth != null ? (r.growth / r.from * 100).toFixed(2) : ''
+  ].join(',')));
+  _downloadCSV(`SDA_StateGrowth_${startQ}_${endQ}.csv`, rows.join('\n'));
+}
+
+const PARTICIPANT_STATE_DCS = [
+  { key: 'DC: Basic', label: 'Basic', color: '#6B8E23' },
+  { key: 'DC: IL', label: 'Improved Liveability', color: '#D95F02' },
+  { key: 'DC: HPS', label: 'High Physical Support', color: '#1B7837' },
+  { key: 'DC: Robust', label: 'Robust', color: '#0288D1' },
+  { key: 'DC: FA', label: 'Fully Accessible', color: '#762A83' },
+  { key: 'DC: Missing', label: 'Missing / not recorded', color: '#6B7280' }
+];
+
+function participantStateDCData() {
+  const quarter = effectiveQ();
+  // Use published State rows only, avoiding duplicate Australia/SA4/SA3 totals.
+  const rows = (cache.participantDCRaw?.by_sa4 || []).filter(r =>
+    r.geo_type === 'State' && r.quarter_str === quarter);
+  const states = ['ACT', 'NSW', 'NT', 'QLD', 'SA', 'TAS', 'VIC', 'WA'];
+  const categories = PARTICIPANT_STATE_DCS.filter(dc => rows.some(r => r.measure_name === dc.key));
+  const values = {};
+  rows.forEach(r => { (values[r.state || r.geo_name] ||= {})[r.measure_name] = r.value; });
+  const totals = {};
+  states.forEach(s => {
+    const counts = categories.map(dc => values[s]?.[dc.key]);
+    // A missing observation is not zero. Do not display an incomplete state as 100%.
+    totals[s] = counts.length && counts.every(Number.isFinite) ? counts.reduce((a, b) => a + b, 0) : null;
+  });
+  return { quarter, states, categories, values, totals };
+}
+
+function renderParticipantStateDC() {
+  const data = participantStateDCData();
+  const hasData = data.states.some(s => data.totals[s] > 0);
+  document.getElementById('pdc-state-subtitle').textContent =
+    `${growthQuarterLabel(data.quarter)} — share of participants with SDA need by design category. ` +
+    'All states and territories; sidebar filters do not apply. Missing categories are shown separately when reported.';
+  const traces = hasData ? data.categories.map(dc => {
+    const percentages = data.states.map(s => data.totals[s] > 0 ? data.values[s][dc.key] / data.totals[s] * 100 : null);
+    return {
+      name: dc.label, type: 'bar', x: data.states, y: percentages,
+      marker: { color: dc.color },
+      text: percentages.map(p => p >= 3 ? `${p.toFixed(0)}%` : ''),
+      textposition: 'inside', textangle: 0, insidetextanchor: 'middle', textfont: { color: 'white', size: 12 },
+      customdata: data.states.map(s => [data.values[s]?.[dc.key] ?? null, data.totals[s]]),
+      hovertemplate: `<b>%{x} — ${dc.label}</b><br>Participants: %{customdata[0]:,.0f}<br>Share: %{y:.1f}%<br>State total: %{customdata[1]:,.0f}<extra></extra>`
+    };
+  }) : [];
+  Plotly.newPlot('chart-pdc-state', traces, {
+    barmode: 'stack', margin: { t: 15, r: 20, b: 110, l: 65 },
+    xaxis: { type: 'category', categoryorder: 'array', categoryarray: data.states },
+    yaxis: { title: 'Share of participant need', range: [0, 100], dtick: 10, ticksuffix: '%', gridcolor: '#F3F4F6' },
+    legend: { orientation: 'h', y: -0.18, x: 0, traceorder: 'normal', font: { size: 11 } },
+    uniformtext: { minsize: 10, mode: 'hide' },
+    annotations: hasData ? [] : [{
+      text: `No participant design-category data is available for ${growthQuarterLabel(data.quarter)}.`,
+      xref: 'paper', yref: 'paper', x: 0.5, y: 0.5, showarrow: false
+    }],
+    plot_bgcolor: 'white', paper_bgcolor: 'white'
+  }, { responsive: true, displayModeBar: false });
+}
+
+function csvParticipantStateDC() {
+  const data = participantStateDCData();
+  const rows = ['Quarter,State,Design Category,Participants,Share (%)'];
+  data.states.forEach(s => data.categories.forEach(dc => {
+    const count = data.values[s]?.[dc.key];
+    const share = data.totals[s] > 0 && count != null ? (count / data.totals[s] * 100).toFixed(2) : '';
+    rows.push([growthQuarterLabel(data.quarter), s, dc.label, count ?? '', share].join(','));
+  }));
+  _downloadCSV(`SDA_ParticipantNeedStateDC_${data.quarter}.csv`, rows.join('\n'));
+}
+
 preloadDatasetMap().then(boot).catch(e => {
   document.getElementById('main').innerHTML =
     `<div class="error-banner">❌ Cannot connect to Flask server. Make sure START_DASHBOARD.bat is running.<br><small>${e}</small></div>`;
@@ -5485,4 +5611,5 @@ preloadDatasetMap().then(boot).catch(e => {
 </script>
 </body>
 </html>
+
 
