@@ -1,0 +1,2211 @@
+{
+  "description": "Selected actual P.11/P.12 component rows, December 2022 and June 2026; no Total rows. Expected counts checked against the Treasury report.",
+  "11_Australia": [
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 52.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 547.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 93.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 25.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 422.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 66.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 33.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 15.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 20.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 26.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 98.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 37.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 63.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 74.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 1070.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 173.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 58.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 1281.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 141.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 30.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 128.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 25.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 5.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 80.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 1589.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 244.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 19.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 808.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    }
+  ],
+  "11_State": [
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 18.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 178.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 54.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 10.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 153.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 39.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 26.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 19.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 6.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 10.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 5.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 7.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Multi-Design Category",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 18.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 323.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 96.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 24.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 356.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 69.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 23.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 55.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 19.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 11.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 58.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 18.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 43.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Multi-Design Category",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    }
+  ],
+  "12_Australia": [
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 19.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 9.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 20.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 21.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 19.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 11.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 8.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 4.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 35.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 4.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 4.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 9.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 134.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 21.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 11.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 42.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 7.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 81.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 33.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 28.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 56.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": null,
+      "value": 19.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 14.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 9.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 20.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 20.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 19.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 8.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 34.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 9.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 112.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 21.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 10.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 44.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 6.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 63.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 20.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 19.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 33.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "Australia",
+      "geo_type": "Australia",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": null,
+      "value": 16.0,
+      "year": 2026
+    }
+  ],
+  "12_State": [
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 8.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 8.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 10.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 16.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 12.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 4.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 35.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 4.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 5.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 4,
+      "quarter_str": "2022-Q4",
+      "state": "NSW",
+      "value": 9.0,
+      "year": 2022
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 8.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 2.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 1 bedroom, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 8.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 1 resident - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 16.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Apartment, 2 bedrooms, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 11.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 0.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 5.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "House, 2 residents - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 1.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Basic",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 29.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Fully Accessible",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 3.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - High Physical Support",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 4.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Improved Liveability",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 5.0,
+      "year": 2026
+    },
+    {
+      "geo_name": "NSW",
+      "geo_type": "State",
+      "measure_name": "Legacy Stock, 6+ residents  - Robust",
+      "quarter_num": 2,
+      "quarter_str": "2026-Q2",
+      "state": "NSW",
+      "value": 9.0,
+      "year": 2026
+    }
+  ]
+}

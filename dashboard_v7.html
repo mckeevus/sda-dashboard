@@ -963,6 +963,43 @@ tbody td.num { font-family: 'DM Mono', monospace; }
       </div>
     </div>
 
+    <div class="card" id="section-building-configurations" data-focus="enrolled" style="margin-top:12px">
+      <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>
+          <div class="card-title">Detailed Building Configuration Changes</div>
+          <div class="card-subtitle" id="building-config-subtitle"></div>
+        </div>
+        <div class="chart-dl-btns">
+          <button class="chart-btn" onclick="dlPNG('chart-building-config','SDA_BuildingConfigurations')">PNG</button>
+          <button class="chart-btn" onclick="csvDetailedBuildingComparison()">Comparison CSV</button>
+          <button class="chart-btn" onclick="csvDetailedBuildingHistory()">Quarterly CSV</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:20px 24px">
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:12px">
+          <label>Start quarter <select id="building-config-start" onchange="renderDetailedBuildingComparison()" style="font-size:12px;padding:6px 8px;border:1px solid var(--grey-200);border-radius:6px"></select></label>
+          <label>End quarter <select id="building-config-end" onchange="renderDetailedBuildingComparison()" style="font-size:12px;padding:6px 8px;border:1px solid var(--grey-200);border-radius:6px"></select></label>
+          <label>Stock <select id="building-config-stock" onchange="renderDetailedBuildingComparison()" style="font-size:12px;padding:6px 8px;border:1px solid var(--grey-200);border-radius:6px">
+            <option value="all">All enrolled</option>
+            <option value="newbuild">New Build + Refurbishment</option>
+            <option value="existing">Existing + Legacy</option>
+          </select></label>
+        </div>
+        <div style="font-size:11px;color:var(--grey-500);line-height:1.6;margin-bottom:12px">
+          Geography, design category, building type and resident filters apply. The stock selector controls stock coverage here.
+          New build includes refurbishment in this detailed breakdown. End quarter follows the global quarter when it changes.
+          Resident labels describe maximum capacity, not actual occupancy. Changes are net movements in enrolled stock.
+        </div>
+        <div id="chart-building-config" style="height:520px"></div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;font-size:12px;border-collapse:collapse">
+            <thead id="building-config-head"></thead>
+            <tbody id="building-config-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <!-- BUILDING TYPE COMPOSITION ANALYSIS -->
     <div style="margin-top:12px" id="section-bt-analysis" data-focus="enrolled">
       <div class="card">
@@ -2146,6 +2183,7 @@ async function boot() {
     renderProvidersStateChart();
     renderSDATypeChart();
   renderEnrolledStateGrowth();
+    renderDetailedBuildingComparison();
     renderDesignCategoryChart();
     renderBuildingTypeChart();
     renderResidentCompositionCharts();
@@ -3168,6 +3206,7 @@ function setDatasetFocus(focus) {
     setDCMode('enrolled');
     renderSDATypeChart();
     renderEnrolledStateGrowth();
+    renderDetailedBuildingComparison();
   }
   if (focus === 'need') renderParticipantStateDC();
 
@@ -3293,6 +3332,7 @@ function refreshAll() {
   renderProvidersStateChart();
   renderSDATypeChart();
   renderEnrolledStateGrowth();
+  renderDetailedBuildingComparison();
   renderDesignCategoryChart();
   renderBuildingTypeChart();
   renderResidentCompositionCharts();
@@ -5604,6 +5644,141 @@ function csvParticipantStateDC() {
   _downloadCSV(`SDA_ParticipantNeedStateDC_${data.quarter}.csv`, rows.join('\n'));
 }
 
+// Retain bedroom/resident configuration text, rather than collapsing to broad building type.
+let buildingConfigGlobalQuarter = null;
+
+function detailedBuildingData() {
+  const selected = state.selectedState;
+  const stock = document.getElementById('building-config-stock').value || 'all';
+  const modeSources = stock === 'newbuild' ? ['nb11'] : stock === 'existing' ? ['ex12'] : ['nb11', 'ex12'];
+  const groups = new Map();
+  const sources = modeSources.map(prefix => {
+    const raw = (cache[prefix + (selected === 'All' ? 'Raw' : 'State')] || []).filter(r =>
+      selected === 'All' || r.state === selected || r.geo_name === selected);
+    const available = new Set(raw.map(r => r.quarter_str));
+    const values = new Map();
+    applyDimFilters(raw).forEach(r => {
+      const match = r.measure_name.match(/^(.+?,.+?)\s+-\s+(.+)$/);
+      if (!match || !Number.isFinite(r.value)) return;
+      const configuration = match[1].trim();
+      groups.set(configuration, r.bt);
+      const key = configuration + '|' + r.quarter_str;
+      values.set(key, (values.get(key) ?? 0) + r.value);
+    });
+    return { available, values };
+  });
+  const quarters = state.quarters;
+  const start = document.getElementById('building-config-start').value;
+  const end = document.getElementById('building-config-end').value;
+  const order = ['Apartment', 'Villa/Duplex/Townhouse', 'House', 'Group home', 'Legacy Stock'];
+  const rows = [...groups].sort((a,b) =>
+    order.indexOf(a[1]) - order.indexOf(b[1]) || a[0].localeCompare(b[0], undefined, { numeric: true })
+  ).map(([configuration]) => {
+    const values = {};
+    quarters.forEach(q => {
+      // Missing source-quarter data must not turn into zero or a partial stock total.
+      values[q] = sources.every(s => s.available.has(q)) ?
+        sources.reduce((sum, s) => sum + (s.values.get(configuration + '|' + q) ?? 0), 0) : null;
+    });
+    const from = values[start], to = values[end];
+    const growth = from == null || to == null ? null : to - from;
+    return { configuration, values, from, to, growth,
+      percent: from > 0 && growth != null ? growth / from * 100 : null };
+  });
+  return { rows, start, end, quarters, stock, selected };
+}
+
+function renderDetailedBuildingComparison() {
+  const start = document.getElementById('building-config-start');
+  const end = document.getElementById('building-config-end');
+  if (!start || !state.quarters.length) return;
+  if (!start.options.length) {
+    [start,end].forEach(el => {
+      state.quarters.forEach(q => {
+        const option = document.createElement('option');
+        option.value = q; option.textContent = growthQuarterLabel(q); el.appendChild(option);
+      });
+    });
+    start.value = state.quarters[0];
+  }
+  if (buildingConfigGlobalQuarter !== effectiveQ()) {
+    end.value = effectiveQ();
+    buildingConfigGlobalQuarter = effectiveQ();
+  }
+  const data = detailedBuildingData();
+  const valid = data.start && data.end && data.start < data.end;
+  const hasData = valid && data.rows.some(r => r.growth != null);
+  const message = !valid ? 'Select an end quarter later than the start quarter.' :
+    !hasData ? 'No comparable building configuration data is available for this selection.' :
+    `${data.selected === 'All' ? 'Australia' : data.selected} — ${growthQuarterLabel(data.start)} to ${growthQuarterLabel(data.end)}. Blank values indicate unavailable observations.`;
+  document.getElementById('building-config-subtitle').textContent = message;
+  const chart = document.getElementById('chart-building-config');
+  chart.style.height = Math.max(360, data.rows.length * 30 + 80) + 'px';
+  Plotly.newPlot(chart, hasData ? [{
+    type: 'bar', orientation: 'h', y: data.rows.map(r => r.configuration), x: data.rows.map(r => r.growth),
+    marker: { color: data.rows.map(r => r.growth < 0 ? '#C62828' : '#522E75') },
+    customdata: data.rows.map(r => [r.from, r.to]),
+    hovertemplate: '<b>%{y}</b><br>Start dwellings: %{customdata[0]:,.0f}<br>End dwellings: %{customdata[1]:,.0f}<br>Net change: %{x:+,.0f}<extra></extra>'
+  }] : [], {
+    margin: { t: 15, r: 25, b: 55, l: 310 },
+    xaxis: { title: 'Net change in enrolled dwellings', tickformat: ',.0f', zeroline: true, gridcolor: '#F3F4F6' },
+    yaxis: { autorange: 'reversed', tickfont: { size: 10 }, automargin: true },
+    annotations: hasData ? [] : [{ text: message, xref: 'paper', yref: 'paper', x: .5, y: .5, showarrow: false }],
+    plot_bgcolor: 'white', paper_bgcolor: 'white', showlegend: false
+  }, { responsive: true, displayModeBar: false });
+  const head = document.getElementById('building-config-head');
+  const body = document.getElementById('building-config-body');
+  head.replaceChildren(); body.replaceChildren();
+  const header = document.createElement('tr');
+  ['Building configuration', 'Start dwellings', 'End dwellings', 'Net change', 'Change (%)'].forEach(text => {
+    const th = document.createElement('th'); th.textContent = text;
+    th.style.cssText = 'text-align:left;padding:8px;border-bottom:2px solid #E5E7EB'; header.appendChild(th);
+  });
+  head.appendChild(header);
+  if (!valid) return;
+  const totals = { from: 0, to: 0, missingFrom: false, missingTo: false };
+  const formatted = n => n == null ? '—' : n.toLocaleString();
+  const appendRow = (row, total = false) => {
+    const tr = document.createElement('tr');
+    [row.configuration, formatted(row.from), formatted(row.to), formatted(row.growth), row.percent == null ? '—' : row.percent.toFixed(1) + '%'].forEach((text,i) => {
+      const td = document.createElement('td'); td.textContent = text;
+      td.style.cssText = `padding:8px;border-bottom:1px solid #E5E7EB;text-align:${i ? 'right' : 'left'};${total ? 'font-weight:700' : ''}`;
+      tr.appendChild(td);
+    }); body.appendChild(tr);
+  };
+  data.rows.forEach(r => {
+    appendRow(r);
+    if (r.from == null) totals.missingFrom = true; else totals.from += r.from;
+    if (r.to == null) totals.missingTo = true; else totals.to += r.to;
+  });
+  if (data.rows.length) {
+    const from = totals.missingFrom ? null : totals.from, to = totals.missingTo ? null : totals.to;
+    const growth = from == null || to == null ? null : to-from;
+    appendRow({ configuration: 'TOTAL', from, to, growth, percent: from > 0 && growth != null ? growth/from*100 : null }, true);
+  }
+}
+
+function detailedBuildingCSVCell(value) {
+  return '"' + String(value ?? '').replace(/"/g, '""') + '"';
+}
+
+function csvDetailedBuildingComparison() {
+  const data = detailedBuildingData();
+  if (!data.start || data.start >= data.end) return;
+  const rows = [['Building configuration','Stock coverage','Geography','Start quarter','End quarter','Start dwellings','End dwellings','Net change','Change (%)']];
+  data.rows.forEach(r => rows.push([r.configuration,data.stock,data.selected,growthQuarterLabel(data.start),growthQuarterLabel(data.end),r.from,r.to,r.growth,r.percent == null ? '' : r.percent.toFixed(2)]));
+  _downloadCSV(`SDA_DetailedBuildingComparison_${data.selected}_${data.start}_${data.end}.csv`, rows.map(row => row.map(detailedBuildingCSVCell).join(',')).join('\n'));
+}
+
+function csvDetailedBuildingHistory() {
+  const data = detailedBuildingData();
+  if (!data.start || data.start >= data.end) return;
+  const qs = data.quarters.filter(q => q >= data.start && q <= data.end);
+  const rows = [['Building configuration','Stock coverage','Geography',...qs.map(growthQuarterLabel)]];
+  data.rows.forEach(r => rows.push([r.configuration,data.stock,data.selected,...qs.map(q => r.values[q])]));
+  _downloadCSV(`SDA_DetailedBuildingQuarterly_${data.selected}_${data.start}_${data.end}.csv`, rows.map(row => row.map(detailedBuildingCSVCell).join(',')).join('\n'));
+}
+
 preloadDatasetMap().then(boot).catch(e => {
   document.getElementById('main').innerHTML =
     `<div class="error-banner">❌ Cannot connect to Flask server. Make sure START_DASHBOARD.bat is running.<br><small>${e}</small></div>`;
@@ -5611,5 +5786,6 @@ preloadDatasetMap().then(boot).catch(e => {
 </script>
 </body>
 </html>
+
 
 
