@@ -1,0 +1,27 @@
+#cube-explorer [hidden] { display:none !important; }
+#cube-explorer { margin-bottom:12px; }
+#cube-explorer .cube-header { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+#cube-explorer .card-body { display:flex; flex-direction:column; gap:14px; }
+.cube-controls { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:12px; }
+.cube-controls label { display:flex; flex-direction:column; gap:6px; min-width:0; font-size:12px; font-weight:600; color:var(--grey-700); }
+.cube-controls select { width:100%; min-width:0; padding:9px 10px; border:1px solid var(--grey-300); border-radius:6px; background:var(--white); color:var(--grey-900); font:inherit; }
+#cube-explorer details { min-width:0; }
+#cube-explorer summary { cursor:pointer; font-size:13px; font-weight:600; color:var(--purple); padding:8px 0; }
+#cube-filters { margin:8px 0 12px; }
+.cube-summary { font-size:14px; font-weight:600; font-variant-numeric:tabular-nums; }
+.cube-chart-title { font-size:15px; color:var(--grey-900); margin-top:4px; }
+.cube-note, .cube-source { font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+.cube-source { color:var(--grey-500); }
+.cube-message { padding:12px; background:var(--purple-pale); color:var(--purple-dark); font-size:13px; line-height:1.6; }
+.cube-table-wrap { overflow-x:auto; max-width:100%; }
+#cube-explorer table { border-collapse:collapse; width:100%; font-size:12px; }
+#cube-explorer th, #cube-explorer td { padding:8px; text-align:left; border-bottom:1px solid var(--grey-300); overflow-wrap:anywhere; }
+#cube-explorer th { font-weight:600; color:var(--grey-900); }
+#cube-explorer td.cube-value { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+#cube-checks { padding-left:20px; font-size:12px; line-height:1.6; }
+#cube-checks li { margin:6px 0; }
+body.cube-focus .sidebar .filter-group:has(.check-item) { display:none; }
+@media (max-width:680px) {
+  #cube-explorer .card-body { padding:14px 12px; }
+  .cube-controls { grid-template-columns:minmax(0,1fr); }
+}

@@ -96,6 +96,7 @@ label {
   margin-bottom: 6px;
 }
 input[type="password"],
+input[type="text"],
 input[type="file"],
 select {
   width: 100%;
@@ -374,6 +375,14 @@ summary:hover { text-decoration: underline; }
       </div>
     </div>
 
+    <div class="card" id="cube-upload-card" style="margin-top:24px">
+      <div class="card-title">Upload an SDA Data Cube Release</div>
+      <p class="card-subtitle">Select all five CSV cubes from the same release. They are validated together and saved as a new source version. Previous cube releases and Supplement P data are retained.</p>
+      <div class="form-group"><label for="cube-release-label">Release label</label><input type="text" id="cube-release-label" maxlength="150" placeholder="e.g. SDA cubes — September 2026 release"></div>
+      <div class="form-group"><label for="cube-files">Five cube CSV files</label><input type="file" id="cube-files" accept=".csv" multiple></div>
+      <button type="button" class="btn btn-primary" id="cube-upload-btn" onclick="uploadCubeRelease()">Validate &amp; Add Cube Release</button>
+      <p id="cube-upload-status" role="status" aria-live="polite" style="margin-top:14px;font-size:13px;line-height:1.6"></p>
+    </div>
   </div>
 
 </div><!-- /page -->
@@ -693,6 +702,20 @@ async function deleteQuarter(qs, fyLabel) {
 // ── Boot ─────────────────────────────────────────────────────────────────────
 initPeriodDropdown();
 checkAuth();
+
+async function uploadCubeRelease() {
+  const status=document.getElementById('cube-upload-status'),button=document.getElementById('cube-upload-btn');
+  const files=document.getElementById('cube-files').files,label=document.getElementById('cube-release-label').value.trim();
+  if(files.length!==5||!label){status.textContent='Enter a release label and select all five CSV files.';return;}
+  const body=new FormData();body.append('label',label);for(const file of files)body.append('files',file);
+  button.disabled=true;status.textContent='Validating all five cubes…';
+  try {
+    const response=await fetch('/admin/cubes/upload',{method:'POST',body}),result=await response.json();
+    if(!response.ok)throw new Error(result.error||'The cube release could not be added.');
+    status.textContent=result.message+' Reload SDA Analytics to select this source release in Data Cubes.';
+  } catch(error){status.textContent='Upload failed; existing releases are retained. '+error.message;}
+  finally {button.disabled=false;}
+}
 </script>
 </body>
 </html>

@@ -1105,6 +1105,10 @@ def admin_delete_quarter():
 # STARTUP
 # ═══════════════════════════════════════════════════════════
 
+# Separate versioned aggregate cubes; Supplement P measures remain independent.
+from cube_store import register_cubes
+register_cubes(app, lambda: DB_PATH, login_required, admin_required)
+
 if __name__ == '__main__':
     print("=" * 60)
     print("SDA Dashboard API Server")
