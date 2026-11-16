@@ -473,6 +473,8 @@ async function checkAuth() {
     const r = await fetch('/admin/status');
     if (r.ok) {
       showUploadSection();
+      const latest = await r.json();
+      if (typeof latest.success === 'boolean') showStatus(latest);
     }
     // else stay on login form
   } catch(e) {
@@ -508,13 +510,13 @@ async function doLogin() {
       showUploadSection();
     } else {
       err.textContent = j.error || 'Incorrect password.';
-      err.style.display = '';
+      err.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'Sign In';
     }
   } catch(e) {
     err.textContent = 'Could not reach server. Please try again.';
-    err.style.display = '';
+    err.style.display = 'block';
     btn.disabled = false;
     btn.textContent = 'Sign In';
   }
@@ -534,12 +536,12 @@ async function doUpload() {
 
   if (!fileInput.files.length) {
     fileErr.textContent = 'Please select a file before uploading.';
-    fileErr.style.display = '';
+    fileErr.style.display = 'block';
     return;
   }
   if (!fileInput.files[0].name.toLowerCase().endsWith('.xlsx')) {
     fileErr.textContent = 'File must be an Excel .xlsx file.';
-    fileErr.style.display = '';
+    fileErr.style.display = 'block';
     return;
   }
 
@@ -569,28 +571,33 @@ async function doUpload() {
 }
 
 function showStatus(j) {
-  const panel  = document.getElementById('status-panel');
-  const title  = document.getElementById('status-title');
-  const detail = document.getElementById('status-detail');
-  const meta   = document.getElementById('status-meta');
-
-  panel.className = 'status-panel ' + (j.success ? 'success' : 'error');
-  title.textContent = j.success ? '\u2713 Upload successful' : '\u2717 Upload failed';
-
-  if (j.success) {
-    const [fy, fyq] = document.getElementById('period-select').value.split('|');
-    detail.innerHTML =
-      'Period: <span class="mono">FY ' + fy + ' ' + fyq + '</span><br>' +
-      'Calendar: <span class="mono">' + fyqCalendarLabel(fy, fyq) + '</span><br>' +
-      'Measures loaded: <span class="mono">' + ((j.rows_loaded || 0).toLocaleString()) + '</span><br>' +
-      (j.message || '');
-  } else {
-    detail.textContent = j.message || 'An unknown error occurred.';
+  const panel=document.getElementById('status-panel');
+  const title=document.getElementById('status-title');
+  const detail=document.getElementById('status-detail');
+  const meta=document.getElementById('status-meta');
+  panel.className='status-panel '+(j.success?'success':'error');
+  title.textContent=j.success?'✓ Upload validated':'✗ Upload failed — existing data retained';
+  detail.replaceChildren();
+  const add=(text,parent=detail)=>{const p=document.createElement('p');p.textContent=text;parent.appendChild(p);return p;};
+  add(j.message || 'No upload result is available.');
+  if(j.success) {
+    add('Calendar quarter: '+j.quarter+' · Measures loaded: '+(j.rows_loaded||0).toLocaleString());
+    if(j.tables?.length) {
+      const table=document.createElement('table');table.style.cssText='width:100%;font-size:12px;border-collapse:collapse;margin-top:12px';
+      const header=document.createElement('tr');
+      ['Dataset','Workbook sheet','Measures','Status'].forEach(t=>{const th=document.createElement('th');th.textContent=t;th.style.cssText='text-align:left;padding:5px;border-bottom:1px solid #CCC';header.appendChild(th);});
+      table.appendChild(header);
+      j.tables.forEach(t=>{const row=document.createElement('tr');[t.canonical,t.sheet,t.rows.toLocaleString(),t.status].forEach(v=>{const td=document.createElement('td');td.textContent=v;td.style.padding='5px';row.appendChild(td);});table.appendChild(row);});
+      detail.appendChild(table);
+    }
   }
-
-  meta.textContent = j.timestamp ? 'Processed at ' + j.timestamp : '';
-  panel.style.display = '';
-  if (j.success) loadQuartersList();
+  if(j.warnings?.length) {
+    const notes=document.createElement('div');notes.style.cssText='margin-top:12px;padding:10px;background:#FFF7ED;color:#92400E';
+    add('Source notes to review',notes).style.fontWeight='700';j.warnings.forEach(w=>add(w,notes));detail.appendChild(notes);
+  }
+  meta.textContent=j.timestamp?'Processed at '+j.timestamp:'';
+  panel.style.display='block';
+  if(j.success)loadQuartersList();
 }
 
 // ── Manage quarters ───────────────────────────────────────────────────────────
@@ -689,3 +696,4 @@ checkAuth();
 </script>
 </body>
 </html>
+
