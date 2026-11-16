@@ -1,0 +1,48 @@
+/* Let every grid/flex ancestor shrink to its available content width. */
+.main { min-width: 0; overflow-y: visible; }
+.mid-row { grid-template-columns: minmax(0,1.1fr) minmax(0,1.2fr) minmax(0,.7fr); }
+.bottom-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.kpi-row { grid-template-columns: repeat(5,minmax(0,1fr)); }
+.card, .card-body, .card-header, .card-toolbar { min-width: 0; max-width: 100%; }
+.card { flex-shrink: 0; }
+.card-body { flex: 1 0 auto; }
+.card-header { overflow-wrap: anywhere; }
+.card-header > *, .card-toolbar > * { min-width: 0; }
+.card-toolbar { flex-wrap: wrap; }
+.card .js-plotly-plot, .kpi-card .js-plotly-plot { width: 100%; min-width: 0; max-width: 100%; }
+.card .plot-container, .card .svg-container { max-width: 100%; }
+.card select { max-width: 100%; }
+@media (max-width: 1200px) {
+  .mid-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .mid-row > :last-child { grid-column: 1 / -1; }
+  .kpi-row { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 900px) {
+  .mid-row, .bottom-row { grid-template-columns: minmax(0,1fr); }
+  .nav-search { display:none; }
+  .nav { gap:8px; padding:0 12px; }
+}
+@media (max-width: 680px) {
+  :root { --sidebar-w: 150px; }
+  .sidebar { padding:12px 8px; }
+  .main { padding:12px 8px; }
+  .nav-logo { font-size:13px; margin-right:0; }
+  .nav-logo-icon, .nav-avatar, .nav-admin-link, .nav-export { display:none; }
+  .nav-pill { padding:6px 8px; font-size:11px; }
+  .kpi-row { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .kpi-value-row { flex-wrap:wrap; }
+  .card-body { padding:14px 12px 18px; }
+  .card-header { padding:12px 12px 0; }
+}
+@media (max-width: 480px) {
+  .shell { flex-direction:column; }
+  .sidebar { width:100%; min-width:0; border-right:0; border-bottom:1px solid var(--grey-300); }
+  .sidebar .filter-group { display:inline-block; vertical-align:top; width:49%; }
+  .sidebar .data-note { display:none; }
+  .main { width:100%; }
+}
+/* Inline chart grids also need shrinkable tracks; Plotly's SVG has an intrinsic width. */
+.main [style*="grid-template-columns"] > * { min-width:0; }
+@media (max-width: 900px) {
+  .main [style*="grid-template-columns"] { grid-template-columns:minmax(0,1fr) !important; }
+}

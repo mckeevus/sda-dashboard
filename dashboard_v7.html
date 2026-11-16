@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SDA Analytics</title>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<script src="/assets/charts.js?v=cubes-1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -508,6 +509,8 @@ tbody td.num { font-family: 'DM Mono', monospace; }
   display: inline-block;
 }
 </style>
+<link rel="stylesheet" href="/assets/charts.css?v=cubes-1">
+<link rel="stylesheet" href="/assets/cube-explorer.css?v=cubes-1">
 </head>
 <body>
 
@@ -582,6 +585,10 @@ tbody td.num { font-family: 'DM Mono', monospace; }
       <div class="radio-item" onclick="setDatasetFocus('need')">
         <input type="radio" name="focus" id="focus-need">
         <label for="focus-need">Participant Need</label>
+      </div>
+      <div class="radio-item" onclick="setDatasetFocus('cubes')">
+        <input type="radio" name="focus" id="focus-cubes">
+        <label for="focus-cubes">Data Cubes</label>
       </div>
     </div>
 
@@ -1715,6 +1722,51 @@ tbody td.num { font-family: 'DM Mono', monospace; }
         </div>
       </div>
     </div>
+
+<section id="section-cubes" data-focus="cubes" style="display:none">
+  <div class="card" id="cube-explorer">
+    <div class="card-header cube-header">
+      <div>
+        <h2 class="card-title">SDA Data Cubes</h2>
+        <p class="card-subtitle">Explore need, participant profiles, enrolled stock and pipeline. The global quarter and state selections apply.</p>
+      </div>
+      <div class="chart-dl-btns">
+        <button type="button" class="chart-btn" id="cube-png" disabled>PNG</button>
+        <button type="button" class="chart-btn" id="cube-csv" disabled>CSV</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="cube-controls">
+        <label>Data cube<select id="cube-dataset" disabled></select></label>
+        <label>View<select id="cube-view" disabled></select></label>
+        <label>Source release<select id="cube-release" disabled></select></label>
+      </div>
+      <div class="cube-controls" id="cube-axes" hidden>
+        <label>Columns<select id="cube-x"></select></label>
+        <label>Rows<select id="cube-y"></select></label>
+        <label>Values<select id="cube-measure"><option value="count">Published counts</option><option value="share">Share within each row (%)</option></select></label>
+      </div>
+      <details id="cube-filter-details">
+        <summary>Filter this cube <span id="cube-filter-count"></span></summary>
+        <div class="cube-controls" id="cube-filters"></div>
+        <button type="button" class="chart-btn" id="cube-reset">Clear cube filters</button>
+      </details>
+      <p id="cube-summary" class="cube-summary" role="status" aria-live="polite">Choose Data Cubes to load the explorer.</p>
+      <p id="cube-unavailable" class="cube-message" hidden></p>
+      <h3 id="cube-chart-title" class="cube-chart-title"></h3>
+      <div id="chart-cube" style="height:460px" role="img" aria-label="SDA data cube chart"></div>
+      <p id="cube-note" class="cube-note"></p>
+      <p id="cube-source" class="cube-source"></p>
+      <details id="cube-values"><summary>View chart data</summary><div class="cube-table-wrap"><table id="cube-data-table"><thead></thead><tbody></tbody></table></div></details>
+      <details id="cube-quality">
+        <summary>Release coverage and checks</summary>
+        <p class="cube-note">The three participant cubes describe different breakdowns of the same population. Their counts must not be added together. Earlier reporting dates can be revised in later releases.</p>
+        <div class="cube-table-wrap"><table id="cube-coverage-table"><thead><tr><th>Cube</th><th>Reporting dates</th><th>Source cells</th><th>Suppressed cells</th></tr></thead><tbody></tbody></table></div>
+        <ul id="cube-checks"></ul>
+      </details>
+    </div>
+  </div>
+</section>
 
   </main>
 </div>
@@ -3202,10 +3254,13 @@ function setState(s) {
 }
 
 function setDatasetFocus(focus) {
+  const previousFocus = state.datasetFocus;
   state.datasetFocus = focus;
+  document.body.classList.toggle('cube-focus', focus === 'cubes');
+  document.getElementById('kpi-row').style.display = focus === 'cubes' ? 'none' : '';
 
   // Sync radio buttons
-  const radioId = { ep:'focus-ep', spend:'focus-spend', enrolled:'focus-enrolled', pipeline:'focus-pipeline', need:'focus-need' }[focus];
+  const radioId = { ep:'focus-ep', spend:'focus-spend', enrolled:'focus-enrolled', pipeline:'focus-pipeline', need:'focus-need', cubes:'focus-cubes' }[focus];
   document.querySelectorAll('input[name="focus"]').forEach(r => { r.checked = (r.id === radioId); });
 
   // Show only cards/sections tagged for this focus
@@ -3233,6 +3288,9 @@ function setDatasetFocus(focus) {
 
   // Map appears only in Enrolled & Pipeline focus; keep it on the enrolled metric
   if (focus === 'ep') setMapMode('enrolled');
+  window.sdaResizeCharts?.();
+  if (focus === 'cubes') window.sdaCubeExplorer?.refresh();
+  else if (previousFocus === 'cubes') refreshAll();
 }
 
 function setDCMode(mode) {
@@ -3316,10 +3374,12 @@ function resetFilters() {
   document.querySelectorAll('.state-btn').forEach(b => b.classList.toggle('active', b.textContent === 'All'));
   document.getElementById('nav-geo-label').textContent = 'Australia (All)';
   document.getElementById('nav-quarter-label').textContent = fmtQ(state.latestQ);
+  window.sdaCubeExplorer?.resetFilters();
   refreshAll();
 }
 
 function refreshAll() {
+  if (state.datasetFocus === 'cubes') { window.sdaCubeExplorer?.refresh(); return; }
   if (!cache.nb11Raw) return;  // not loaded yet
 
   // Rebuild all derived timeseries from cached multi-dim raw rows
@@ -5409,6 +5469,7 @@ function csvGrowthMap() {
 // EXPORT
 // ══════════════════════════════════════════════════
 function exportCSV() {
+  if (state.datasetFocus === 'cubes') return window.sdaCubeExplorer?.exportCSV();
   const data = state.selectedState === 'All' ? cache.sa4Data :
     cache.sa4Data.filter(r => r.state === state.selectedState);
   if (!data) return;
@@ -5798,6 +5859,7 @@ preloadDatasetMap().then(boot).catch(e => {
     `<div class="error-banner">❌ Cannot connect to Flask server. Make sure START_DASHBOARD.bat is running.<br><small>${e}</small></div>`;
 });
 </script>
+<script src="/assets/cube-explorer.js?v=cubes-1"></script>
 </body>
 </html>
 
