@@ -916,6 +916,7 @@ tbody td.num { font-family: 'DM Mono', monospace; }
           <div>
             <div class="card-title">Active Providers by State</div>
             <div class="card-subtitle" id="providers-subtitle">Providers active this quarter</div>
+            <div id="providers-source-note" style="display:none;margin-top:6px;font-size:11px;color:#92400E"></div>
           </div>
           <div class="chart-dl-btns">
             <button class="chart-btn" onclick="dlPNG('chart-providers-state','SDA_ProvidersState')" title="Download PNG">PNG</button>
@@ -1695,6 +1696,9 @@ tbody td.num { font-family: 'DM Mono', monospace; }
 
     <!-- PIPELINE DWELLINGS BY BUILDING TYPE & MAX RESIDENTS (new) -->
     <div style="margin-top:12px" id="section-pipeline-bt-maxres" data-focus="pipeline">
+      <div id="pipeline-source-note" style="display:none;margin-bottom:10px;padding:12px;background:#FFF7ED;color:#92400E;font-size:12px;line-height:1.5">
+        Pipeline is provider-reported and is not confirmed future SDA supply. It can omit construction projects or temporarily include recently enrolled dwellings. From 30 March 2026, the NDIA removes records that have not progressed to enrolment within 36 months of being added; this is not a guaranteed completion deadline.
+      </div>
       <div class="card">
         <div class="card-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--grey-100)">
           <div>
@@ -2097,6 +2101,7 @@ function renderPipelineBtMaxRes() {
   const rows = applyDimFilters((pl || []).filter(stateFilter)).filter(r => r.quarter_str === q);
 
   const subEl = document.getElementById('pl-btmr-subtitle');
+  document.getElementById('pipeline-source-note').style.display = q >= '2026-Q1' ? '' : 'none';
   if (subEl) subEl.textContent = `Pipeline dwellings by building type, stacked by max residents — ${fmtQ(q)}`;
 
   const btOrder = ['Apartment', 'Villa/Duplex/Townhouse', 'House', 'Group home'];
@@ -2250,6 +2255,7 @@ async function loadAllData() {
   const providersApiResult = await apiFetch('/api/providers');
   const providers      = providersApiResult.timeseries;
   const providersState = providersApiResult.by_state;
+  cache.providersSourceNotes = providersApiResult.source_notes || {};
 
   // Participant need + DC breakdowns + Financial + SA3 dwellings
   const [participantsResult, participantDCResult, financialResult, dwSa3Result, utilisationResult,
@@ -2559,6 +2565,9 @@ function renderKPIs() {
   setKPI('need',      need.toLocaleString(),       calcChange(need,     getPrevVal(cache.needTs)));
   setKPI('growth',    (growth >= 0 ? '+' : '') + growth.toLocaleString(), null, growth >= 0 ? 'up' : 'down');
   setKPI('providers', providers ? Math.round(providers).toLocaleString() : '—', calcChange(providers, prevProviders));
+  const providerSource = cache.providersSourceNotes?.[eqQ];
+  document.getElementById('kpi-providers').title = providerSource ?
+    `Released with ${growthQuarterLabel(eqQ)}; the source table title refers to ${growthQuarterLabel(providerSource.title_quarter)}.` : '';
 
   // Sparklines — providers sparkline uses state or national depending on selection
   const provTs = (sel !== 'All' && cache.providersTs_state?.[sel])
@@ -3054,6 +3063,11 @@ function renderProvidersStateChart() {
   const qLabel = fmtQ(d._quarter || '');
   document.getElementById('providers-subtitle').textContent =
     `Active providers — ${qLabel}`;
+  const source = cache.providersSourceNotes?.[d._quarter];
+  const sourceNote = document.getElementById('providers-source-note');
+  sourceNote.style.display = source ? '' : 'none';
+  sourceNote.textContent = source ?
+    `Source-date discrepancy: released with ${growthQuarterLabel(d._quarter)}, but the workbook's provider title refers to ${growthQuarterLabel(source.title_quarter)}. The counts are shown with the release quarter; the reference date needs confirmation.` : '';
 
   const stateOrder = ['NSW','VIC','QLD','WA','SA','TAS','NT','ACT'];
   const vals = stateOrder.map(s => d[s] || 0);
@@ -5786,6 +5800,7 @@ preloadDatasetMap().then(boot).catch(e => {
 </script>
 </body>
 </html>
+
 
 
 

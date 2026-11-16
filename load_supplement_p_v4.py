@@ -169,42 +169,18 @@ SHEET_SIGNATURES = [
 
 
 def identify_sheet(title):
-    """Match a sheet title to a canonical table name using keyword signatures."""
-    for sig in SHEET_SIGNATURES:
-        if all(kw in title for kw in sig['must_have']):
-            if not any(kw in title for kw in sig['must_not']):
-                return sig['canonical'], sig['desc']
-    return None, None
+    from supplement_import import identify_title
+    return identify_title(title)
 
 
 def detect_sheets(filepath):
-    """Scan all sheets in a file, return {canonical_name: sheet_name} mapping."""
-    wb = openpyxl.load_workbook(filepath, read_only=True, data_only=True)
-    mapping = {}
-
-    for sheet_name in wb.sheetnames:
-        if not sheet_name.startswith('Table'):
-            continue
-        ws = wb[sheet_name]
-        title = ''
-        for row in ws.iter_rows(min_row=1, max_row=3, max_col=1, values_only=True):
-            if row[0] and len(str(row[0])) > 20:
-                title = str(row[0])
-                break
-
-        if title:
-            canonical, desc = identify_sheet(title)
-            if canonical and canonical not in mapping:
-                mapping[canonical] = sheet_name
-
-    wb.close()
-    return mapping
+    from supplement_import import detect_sheets as detect
+    return detect(filepath)
 
 
 # ============================================================
 # GEOGRAPHY PARSING
 # ============================================================
-
 STATE_ABBREVS = ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT']
 
 
@@ -862,16 +838,19 @@ def get_dataset_id(conn, source_table, description=''):
 # ============================================================
 
 def parse_quarter_from_filename(filename):
-    """Extract quarter from filename. Handles multiple naming conventions."""
-    # '2025-26 Q2' or '2025-26_Q2'
-    match = re.search(r'(\d{4})-\d{2}[\s_]+Q(\d)', filename)
-    if match:
-        return '{}-Q{}'.format(match.group(1), match.group(2))
-    # '202526_Q2'
-    match = re.search(r'(\d{4})\d{2}_Q(\d)', filename)
-    if match:
-        return '{}-Q{}'.format(match.group(1), match.group(2))
-    return None
+    """Resolve Australian financial quarters separately from calendar keys."""
+    explicit = re.search(r'(20\d{2})-Q([1-4])', filename)
+    if explicit:
+        return '{}-Q{}'.format(*explicit.groups())
+    match = re.search(r'(20\d{2})-(\d{2})[\s_]+Q([1-4])', filename)
+    if not match:
+        match = re.search(r'(20\d{2})(\d{2})_Q([1-4])', filename)
+    if not match:
+        return None
+    year, end, q = match.groups(); year = int(year)
+    if int(end) != (year + 1) % 100:
+        return None
+    return {1: f'{year}-Q3', 2: f'{year}-Q4', 3: f'{year+1}-Q1', 4: f'{year+1}-Q2'}[int(q)]
 
 
 def find_supplement_files(folder_path):
@@ -908,113 +887,14 @@ def find_supplement_files(folder_path):
 # ============================================================
 
 def load_file(conn, filepath, quarter_str):
-    """Load all detected tables from one Supplement P file."""
-    print("\n  Loading {}: {}".format(quarter_str, Path(filepath).name))
-
-    # Detect sheets by title
-    try:
-        sheet_map = detect_sheets(filepath)
-    except Exception as e:
-        print("    ERROR opening file: {}".format(e))
-        return 0
-
-    if not sheet_map:
-        print("    No table sheets detected")
-        return 0
-
-    quarter_id = get_or_create_quarter(conn, quarter_str)
-    total_inserted = 0
-    cursor = conn.cursor()
-
-    for canonical, sheet_name in sorted(sheet_map.items()):
-        # Choose parser based on table type
-        if canonical == 'Table P.3':
-            records, error = parse_p3_table(str(filepath), sheet_name)
-
-        elif canonical == 'Table P.1':
-            records, error = parse_p1_table(str(filepath), sheet_name)
-
-        elif canonical in ('Table P.9',):
-            # Participant need SA4 — all quarters, era-aware
-            records, error = parse_participant_need_table(
-                str(filepath), sheet_name, quarter_str, geo_level='SA4')
-
-        elif canonical in ('Table P.17',):
-            # Participant need SA3 — all quarters, era-aware
-            records, error = parse_participant_need_table(
-                str(filepath), sheet_name, quarter_str, geo_level='SA3')
-
-        elif canonical in ('Table P.10',):
-            # Participant DC SA4 — only 2024-25 Q2 onward
-            if not quarter_ge(quarter_str, '2024-Q2'):
-                print("    -- {} -> {}: skipped (era: pre 2024-25 Q2)".format(
-                    sheet_name, canonical))
-                continue
-            records, error = parse_participant_dc_table(
-                str(filepath), sheet_name, quarter_str, geo_level='SA4')
-
-        elif canonical in ('Table P.18',):
-            # Participant DC SA3 — only 2024-25 Q2 onward
-            if not quarter_ge(quarter_str, '2024-Q2'):
-                print("    -- {} -> {}: skipped (era: pre 2024-25 Q2)".format(
-                    sheet_name, canonical))
-                continue
-            records, error = parse_participant_dc_table(
-                str(filepath), sheet_name, quarter_str, geo_level='SA3')
-
-        elif canonical == 'Table P.2':
-            # Financial — all quarters
-            records, error = parse_p2_financial_table(str(filepath), sheet_name)
-
-        elif canonical == 'Table P.6':
-            # Enrolled dwellings by max residents — standard parse into measures table
-            records, error = parse_standard_table(str(filepath), sheet_name)
-            # Also extract capacity summary into sda_capacity table
-            if not error:
-                extract_sda_capacity(conn, str(filepath), sheet_name, quarter_str)
-
-        else:
-            records, error = parse_standard_table(str(filepath), sheet_name)
-
-        if error:
-            print("    {} {} -> {}: {}".format(
-                chr(9888), sheet_name, canonical, error))
-            continue
-
-        if not records:
-            print("    {} {} -> {}: No data".format(
-                chr(9888), sheet_name, canonical))
-            continue
-
-        # Find description from signatures
-        desc = ''
-        for sig in SHEET_SIGNATURES:
-            if sig['canonical'] == canonical:
-                desc = sig['desc']
-                break
-
-        dataset_id = get_dataset_id(conn, canonical, desc)
-        inserted = 0
-
-        for geo_type, state, region_name, measure_name, value in records:
-            geo_id = get_or_create_geography(conn, geo_type, region_name, state)
-            try:
-                cursor.execute("""
-                    INSERT OR REPLACE INTO measures
-                    (quarter_id, dataset_id, geo_id, measure_name, value)
-                    VALUES (?,?,?,?,?)
-                """, (quarter_id, dataset_id, geo_id, measure_name, value))
-                inserted += 1
-            except Exception:
-                pass
-
-        conn.commit()
-        marker = ' ***' if canonical in ('Table P.11', 'Table P.12') else ''
-        print("    {} {} -> {}: {:,} measures{}".format(
-            chr(10003), sheet_name, canonical, inserted, marker))
-        total_inserted += inserted
-
-    return total_inserted
+    """Use the same validated, atomic path for CLI rebuilds and admin uploads."""
+    from supplement_import import prepare_workbook, write_prepared
+    prepared = prepare_workbook(filepath, quarter_str)
+    with conn:
+        conn.execute('BEGIN IMMEDIATE')
+        result = write_prepared(conn, prepared, 'replace')
+    print(result['message'])
+    return result['rows_loaded']
 
 
 def verify_database(db_path):
@@ -1194,101 +1074,10 @@ def load_all(db_path, folder_path):
 # IMPORTABLE ENTRY POINT  (called by app.py admin upload)
 # ============================================================
 
-def run_loader(filepath, quarter_str, mode, db_path=None):
-    """
-    Load a single Supplement P Excel file into the database.
-    Designed to be imported and called from app.py for the admin upload feature.
-
-    Args:
-        filepath (str):      Path to the .xlsx file to load.
-        quarter_str (str):   Quarter in calendar 'YYYY-QN' format (e.g. '2025-Q3').
-        mode (str):          'new'     — insert rows, skip if quarter already exists.
-                             'replace' — delete all existing rows for this quarter first,
-                                         then reload from the file.
-        db_path (str|None):  Path to the SQLite DB.
-                             Resolved in order:
-                               1. db_path argument (if provided)
-                               2. DB_PATH environment variable
-                               3. sda_dashboard_clean.db next to this module
-
-    Returns:
-        dict: {
-            'success':     bool,
-            'quarter':     str,
-            'rows_loaded': int,
-            'message':     str,
-        }
-    """
-    # 1 — Resolve DB path
-    if db_path is None:
-        db_path = os.environ.get(
-            'DB_PATH',
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sda_dashboard_clean.db')
-        )
-
-    # 2 — Validate quarter_str format
-    if not re.match(r'^\d{4}-Q[1-4]$', quarter_str):
-        return {
-            'success': False, 'quarter': quarter_str, 'rows_loaded': 0,
-            'message': 'Invalid quarter format: {!r}. Expected YYYY-QN (e.g. 2025-Q3).'.format(quarter_str),
-        }
-
-    # 3 — DB must already exist (do not wipe it)
-    if not os.path.exists(db_path):
-        return {
-            'success': False, 'quarter': quarter_str, 'rows_loaded': 0,
-            'message': 'Database not found: {}'.format(db_path),
-        }
-
-    conn = None
-    try:
-        conn = sqlite3.connect(db_path)
-
-        # Ensure sda_capacity table exists (for existing DBs predating this feature)
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS sda_capacity (
-                quarter TEXT PRIMARY KEY,
-                total_dwellings INTEGER,
-                total_places INTEGER
-            )
-        """)
-        conn.commit()
-
-        # 4 — Replace mode: delete existing measures and capacity for this quarter
-        if mode == 'replace':
-            cursor = conn.cursor()
-            cursor.execute("SELECT quarter_id FROM quarters WHERE quarter_str=?", (quarter_str,))
-            row = cursor.fetchone()
-            if row:
-                cursor.execute("DELETE FROM measures WHERE quarter_id=?", (row[0],))
-                cursor.execute("DELETE FROM sda_capacity WHERE quarter=?", (quarter_str,))
-                conn.commit()
-                print("  Deleted existing measures for {} (replace mode)".format(quarter_str))
-
-        # 5 — Load the file
-        rows = load_file(conn, str(filepath), quarter_str)
-        conn.close()
-        conn = None
-
-        return {
-            'success': True,
-            'quarter': quarter_str,
-            'rows_loaded': rows,
-            'message': 'Successfully loaded {:,} measures for {}.'.format(rows, quarter_str),
-        }
-
-    except Exception as exc:
-        if conn:
-            try:
-                conn.close()
-            except Exception:
-                pass
-        return {
-            'success': False,
-            'quarter': quarter_str,
-            'rows_loaded': 0,
-            'message': str(exc),
-        }
+def run_loader(filepath, quarter_str, mode, db_path=None, **kwargs):
+    """Import one workbook only after all mappings and totals validate."""
+    from supplement_import import run_loader as validated_loader
+    return validated_loader(filepath, quarter_str, mode, db_path=db_path, **kwargs)
 
 
 if __name__ == '__main__':
@@ -1309,3 +1098,4 @@ if __name__ == '__main__':
         verify_database(args.db)
     else:
         load_all(args.db, args.folder)
+

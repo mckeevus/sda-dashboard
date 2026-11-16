@@ -25,6 +25,7 @@ REQUIRED ENVIRONMENT VARIABLES (set in Railway → Variables)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """
 import os
+import json
 import re
 import secrets
 import tempfile
@@ -193,6 +194,12 @@ def _init_db():
         print("WARNING: DB init error: {}".format(e))
 
 _init_db()
+
+# Apply versioned corrections to already-uploaded data. The repair takes a full
+# SQLite backup, is transactional, and records a persistent one-time marker.
+from supplement_import import apply_bundled_repairs
+for _repair in apply_bundled_repairs(DB_PATH):
+    print('Applied Supplement P data repair:', _repair)
 
 # ── Auth helpers ───────────────────────────────────────────
 
@@ -444,41 +451,56 @@ def get_timeseries():
 @login_required
 @app.route('/api/providers', methods=['GET'])
 def get_providers():
-    """Active SDA providers from Table P.3."""
+    """Current providers across legacy labels and the new Providers column."""
     conn = get_db()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT q.quarter_str, q.year, q.quarter_num, m.value
-        FROM measures m
-        JOIN datasets    d ON m.dataset_id = d.dataset_id
-        JOIN quarters    q ON m.quarter_id = q.quarter_id
-        JOIN geographies g ON m.geo_id     = g.geo_id
-        WHERE d.source_table = 'Table P.3'
-          AND g.geo_type     = 'Australia'
-          AND g.name         = 'Australia'
-          AND LOWER(m.measure_name) LIKE '%active in%'
+    rows = conn.execute("""
+        SELECT q.quarter_str, q.year, q.quarter_num, g.geo_type,
+               g.state, g.name AS geo_name, m.measure_name, m.value
+        FROM measures m JOIN datasets d USING(dataset_id)
+        JOIN quarters q USING(quarter_id) JOIN geographies g USING(geo_id)
+        WHERE d.source_table='Table P.3' AND g.geo_type IN ('Australia','State')
+          AND (LOWER(m.measure_name) IN ('providers','active providers')
+               OR LOWER(m.measure_name) LIKE '%active in%')
           AND LOWER(m.measure_name) NOT LIKE '%ever%'
-        ORDER BY q.year, q.quarter_num
-    """)
-    timeseries = [dict(row) for row in cursor.fetchall()]
-
-    cursor.execute("""
-        SELECT q.quarter_str, q.year, q.quarter_num, g.state, g.name AS geo_name, m.value
-        FROM measures m
-        JOIN datasets    d ON m.dataset_id = d.dataset_id
-        JOIN quarters    q ON m.quarter_id = q.quarter_id
-        JOIN geographies g ON m.geo_id     = g.geo_id
-        WHERE d.source_table = 'Table P.3'
-          AND g.geo_type     = 'State'
-          AND LOWER(m.measure_name) LIKE '%active in%'
-          AND LOWER(m.measure_name) NOT LIKE '%ever%'
-        ORDER BY q.year, q.quarter_num, m.value DESC
-    """)
-    by_state = [dict(row) for row in cursor.fetchall()]
-
+        ORDER BY q.year,q.quarter_num,g.name
+    """).fetchall()
+    chosen = {}
+    for row in rows:
+        key = (row['quarter_str'],row['geo_type'],row['state'],row['geo_name'])
+        priority = 0 if row['measure_name'].lower()=='active providers' else 1 if row['measure_name'].lower()=='providers' else 2
+        if key not in chosen or priority < chosen[key][0]:
+            chosen[key]=(priority,dict(row))
+    timeseries, by_state = [], []
+    for _,r in chosen.values():
+        item={k:r[k] for k in ('quarter_str','year','quarter_num','value')}
+        if r['geo_type']=='Australia':timeseries.append(item)
+        else:by_state.append(item|{'state':r['state'],'geo_name':r['geo_name']})
+    reports = conn.execute('SELECT quarter,report_json FROM import_runs ORDER BY run_id').fetchall()
+    source_notes = {}
+    for row in reports:
+        report = json.loads(row['report_json'])
+        source = next((t for t in report['tables'] if t['canonical']=='Table P.3'),None)
+        if source and source.get('title_quarter') and source['title_quarter']!=row['quarter']:
+            source_notes[row['quarter']] = {'title_quarter':source['title_quarter'],'release_quarter':row['quarter']}
     conn.close()
-    return jsonify({'timeseries': timeseries, 'by_state': by_state})
+    return jsonify({'timeseries':timeseries,'by_state':by_state,'source_notes':source_notes})
+
+
+@app.route('/api/import-quality', methods=['GET'])
+def import_quality():
+    """Public aggregate import coverage and source caveats; no credential or backup paths."""
+    conn=get_db()
+    quarter=request.args.get('quarter')
+    if not quarter:
+        quarter=conn.execute('SELECT MAX(quarter_str) FROM quarters').fetchone()[0]
+    row=conn.execute('SELECT report_json FROM import_runs WHERE quarter=? ORDER BY run_id DESC LIMIT 1',(quarter,)).fetchone()
+    coverage=conn.execute("""SELECT d.source_table, g.geo_type, COUNT(*) AS rows
+        FROM measures m JOIN datasets d USING(dataset_id) JOIN geographies g USING(geo_id)
+        JOIN quarters q USING(quarter_id) WHERE q.quarter_str=?
+        GROUP BY d.source_table,g.geo_type ORDER BY d.source_table,g.geo_type""",(quarter,)).fetchall()
+    conn.close()
+    report=json.loads(row['report_json']) if row else None
+    return jsonify({'quarter':quarter,'report':report,'coverage':[dict(r) for r in coverage]})
 
 
 # ═══════════════════════════════════════════════════════════
@@ -926,6 +948,11 @@ def admin_status():
     """Return the result of the last upload attempt, or a ready message."""
     if _last_upload_result:
         return jsonify(_last_upload_result)
+    conn = get_db()
+    row = conn.execute('SELECT report_json FROM import_runs ORDER BY run_id DESC LIMIT 1').fetchone()
+    conn.close()
+    if row:
+        return jsonify(json.loads(row['report_json']))
     return jsonify({'status': 'ready', 'message': 'No upload has been processed yet.'})
 
 
@@ -973,7 +1000,7 @@ def admin_upload():
             tmp_path = tmp.name
             f.save(tmp_path)
 
-        result = run_loader(tmp_path, quarter_str, mode, db_path=DB_PATH)
+        result = run_loader(tmp_path, quarter_str, mode, db_path=DB_PATH, source_filename=f.filename)
         result['timestamp'] = now
 
     except Exception as exc:
@@ -1091,3 +1118,4 @@ if __name__ == '__main__':
     print("  /api/financial")
     print("\nCtrl+C to stop\n" + "=" * 60)
     app.run(debug=True, port=5000)
+
